@@ -1,0 +1,34 @@
+RewriteEngine On
+RewriteRule ^admin$ admin.php
+RewriteRule ^home$ index.php
+# view 
+#xassida
+RewriteRule ^listeXassida$ view/pages/admin/xassida/listeXassida.php
+RewriteRule ^corbeilleXassida$ view/pages/admin/xassida/corbeilleXassida.php
+#coran 
+RewriteRule ^listeCoran$ view/pages/admin/coran/listeCoran.php
+RewriteRule ^corbeilleCoran$ view/pages/admin/coran/corbeilleCoran.php
+#audio 
+RewriteRule ^listeAudio$ view/pages/admin/audio/listeAudio.php
+RewriteRule ^corbeilleAudio$ view/pages/admin/audio/corbeilleAudio.php
+#dictaphone 
+RewriteRule ^listeCapture$ view/pages/admin/dictaphone/captureAudio.php
+RewriteRule ^corbeilleCapture$ view/pages/admin/dictaphone/corbeilleCapture.php
+#horaires 
+RewriteRule ^listeHeures$ view/pages/admin/horairesprieres/listeHeuresprieres.php
+# localisation 
+RewriteRule ^listeLoc$ view/pages/admin/localisation/listeLoc.php
+#qibla 
+RewriteRule ^listeQibla$ view/pages/admin/qibla/listeQibla.php
+#user
+RewriteRule ^listeUser$ view/pages/admin/user/listeUser.php
+#faq 
+RewriteRule ^listeFaq$ view/pages/admin/faq/listeFaq.php
+#historique 
+RewriteRule ^listeHist$ view/pages/admin/historique/listeHist.php
+RewriteRule ^corbeilleHist$ view/pages/admin/historique/corbeilleHist.php
+#parametres 
+RewriteRule ^listePara$ view/pages/admin/parametres/settings.php
+#NEWSLETTERS 
+RewriteRule ^listeNews$ view/pages/admin/newsletters/listeNews.php
+RewriteRule ^corbeilleNews$ view/pages/admin/newsletters/corbeilleNews.php
