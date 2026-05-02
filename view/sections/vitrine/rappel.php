@@ -1,22 +1,27 @@
 <section id="about" class="about section">
 
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Rappels</h2>
+        <div><span>Découvrez</span> <span class="description-title">Nos Rappels</span></div>
+      </div><!-- End Section Title -->
+
       <div class="container">
 
         <div class="row gy-4">
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <p class="who-we-are">Who We Are</p>
-            <h3>Unleashing Potential with Creative Strategy</h3>
+            <p class="who-we-are">Restez connecté à votre foi</p>
+            <h3>Des rappels spirituels pour accompagner votre quotidien</h3>
             <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              YoonWi vous envoie chaque jour des rappels spirituels pour vous aider à rester proche de votre religion, où que vous soyez.
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Verset du jour : recevez chaque matin un verset du Coran avec sa traduction pour commencer la journée dans la sérénité.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Beuyit du jour : découvrez chaque jour un extrait de Khassida pour nourrir votre esprit et renforcer votre foi.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Horaires de prière : soyez notifié automatiquement à chaque heure de prière selon votre localisation à Dakar et partout au Sénégal.</span></li>
             </ul>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            <a href="#" class="read-more"><span>En savoir plus</span><i class="bi bi-arrow-right"></i></a>
           </div>
 
           <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
@@ -35,7 +40,6 @@
                 </div>
               </div>
             </div>
-
           </div>
 
         </div>

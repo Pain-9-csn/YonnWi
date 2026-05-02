@@ -1,8 +1,8 @@
 <section id="services" class="services section">
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <div><span>Check Our</span> <span class="description-title">Services</span></div>
+        <h2>Fonctionnalités</h2>
+        <div><span>Découvrez</span> <span class="description-title">Nos Fonctionnalités</span></div>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -10,77 +10,74 @@
         <div class="row gy-4">
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item  position-relative">
+            <div class="service-item position-relative">
               <div class="icon">
-                <i class="bi bi-activity"></i>
+                <i class="bi bi-music-note-beamed"></i>
               </div>
               <a href="service-details.html" class="stretched-link">
-                <h3>Nesciunt Mete</h3>
+                <h3>Khassidas</h3>
               </a>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
+              <p>Accédez à une large bibliothèque de Khassidas. Écoutez et lisez les poèmes spirituels de vos marabouts préférés à tout moment.</p>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item position-relative">
               <div class="icon">
-                <i class="bi bi-broadcast"></i>
+                <i class="bi bi-book"></i>
               </div>
               <a href="service-details.html" class="stretched-link">
-                <h3>Eosle Commodi</h3>
+                <h3>Coran</h3>
               </a>
-              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+              <p>Lisez et écoutez le Coran avec sa traduction en français. Naviguez facilement entre les sourates et les versets.</p>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="service-item position-relative">
               <div class="icon">
-                <i class="bi bi-easel"></i>
+                <i class="bi bi-clock"></i>
               </div>
               <a href="service-details.html" class="stretched-link">
-                <h3>Ledo Markt</h3>
+                <h3>Heures de Prière</h3>
               </a>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+              <p>Consultez les horaires de prière selon votre localisation. Recevez des notifications automatiques pour chaque prière de la journée.</p>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
             <div class="service-item position-relative">
               <div class="icon">
-                <i class="bi bi-bounding-box-circles"></i>
+                <i class="bi bi-compass"></i>
               </div>
               <a href="service-details.html" class="stretched-link">
-                <h3>Asperiores Commodit</h3>
+                <h3>Qibla</h3>
               </a>
-              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              <a href="service-details.html" class="stretched-link"></a>
+              <p>Trouvez la direction de La Mecque où que vous soyez grâce à notre boussole intégrée. Priez toujours dans la bonne direction.</p>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
             <div class="service-item position-relative">
               <div class="icon">
-                <i class="bi bi-calendar4-week"></i>
+                <i class="bi bi-headphones"></i>
               </div>
               <a href="service-details.html" class="stretched-link">
-                <h3>Velit Doloremque</h3>
+                <h3>Lecteur MP3</h3>
               </a>
-              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-              <a href="service-details.html" class="stretched-link"></a>
+              <p>Profitez d'un lecteur audio intégré pour écouter vos Khassidas et récitations coraniques avec une qualité sonore optimale.</p>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
             <div class="service-item position-relative">
               <div class="icon">
-                <i class="bi bi-chat-square-text"></i>
+                <i class="bi bi-mic"></i>
               </div>
               <a href="service-details.html" class="stretched-link">
-                <h3>Dolori Architecto</h3>
+                <h3>Saisie Vocale</h3>
               </a>
-              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-              <a href="service-details.html" class="stretched-link"></a>
+              <p>Recherchez facilement vos contenus spirituels par la voix. Dites simplement le nom d'une sourate ou d'un Khassida et YoonWi le trouve pour vous.</p>
             </div>
           </div><!-- End Service Item -->
 

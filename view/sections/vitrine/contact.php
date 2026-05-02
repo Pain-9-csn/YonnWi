@@ -2,8 +2,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <div><span>Need Help?</span> <span class="description-title">Contact Us</span></div>
+        <h2>Newsletters</h2>
+        <div><span>Besoin d'aide?</span> <span class="description-title">Contactez-Nous</span></div>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade" data-aos-delay="100">
@@ -14,24 +14,24 @@
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
               <i class="bi bi-geo-alt flex-shrink-0"></i>
               <div>
-                <h3>Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <h3>Adresse</h3>
+                <p>Dakar, Sénégal</p>
               </div>
             </div><!-- End Info Item -->
 
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-telephone flex-shrink-0"></i>
               <div>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
+                <h3>Appelez-Nous</h3>
+                <p>+221 77 716 06 35</p>
               </div>
             </div><!-- End Info Item -->
 
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
               <i class="bi bi-envelope flex-shrink-0"></i>
               <div>
-                <h3>Email Us</h3>
-                <p>info@example.com</p>
+                <h3>Email</h3>
+                <p>test@gmail.com</p>
               </div>
             </div><!-- End Info Item -->
 
@@ -42,27 +42,27 @@
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <input type="text" name="name" class="form-control" placeholder="Votre Nom" required="">
                 </div>
 
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                <div class="col-md-6">
+                  <input type="email" class="form-control" name="email" placeholder="Votre Email" required="">
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                  <input type="text" class="form-control" name="subject" placeholder="Sujet" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Votre Message" required=""></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
+                  <div class="loading">Chargement...</div>
                   <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                  <div class="sent-message">Votre message a bien été envoyé. Merci !</div>
 
-                  <button type="submit">Send Message</button>
+                  <button type="submit">Envoyer le Message</button>
                 </div>
 
               </div>
