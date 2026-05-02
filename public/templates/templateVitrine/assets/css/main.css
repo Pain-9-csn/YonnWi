@@ -181,6 +181,8 @@ h6 {
 @media (min-width: 1200px) {
   .navmenu {
     padding: 0;
+    display: flex;
+    align-items: center;
   }
 
   .navmenu ul {
@@ -189,6 +191,7 @@ h6 {
     display: flex;
     list-style: none;
     align-items: center;
+    flex-wrap: nowrap;
   }
 
   .navmenu li {
@@ -198,8 +201,8 @@ h6 {
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-color);
-    padding: 18px 15px;
-    font-size: 16px;
+    padding: 18px 10px;
+    font-size: 13px;
     font-family: var(--nav-font);
     font-weight: 400;
     display: flex;
@@ -282,6 +285,27 @@ h6 {
     left: -100%;
     visibility: visible;
   }
+
+  /* Bouton Se Connecter - Desktop */
+  .navmenu .btn-get-started {
+    background: var(--accent-color);
+    color: var(--contrast-color) !important;
+    padding: 8px 20px !important;
+    border-radius: 50px;
+    font-size: 13px !important;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: 0.3s;
+    margin-left: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .navmenu .btn-get-started:hover {
+    background: color-mix(in srgb, var(--accent-color), transparent 15%);
+    color: var(--contrast-color) !important;
+  }
 }
 
 /* Navmenu - Mobile */
@@ -356,12 +380,17 @@ h6 {
     color: var(--nav-dropdown-hover-color);
   }
 
-  .navmenu .active i,
-  .navmenu .active:focus i {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
-    transform: rotate(180deg);
-  }
+  .navmenu .active .toggle-dropdown,
+.navmenu .active:focus .toggle-dropdown {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+  .navmenu .toggle-dropdown {
+  background-color: #f1f1f1 !important;
+  color: #666 !important;
+  transition: 0.3s;
+}
 
   .navmenu .dropdown ul {
     position: static;
@@ -408,6 +437,25 @@ h6 {
 
   .mobile-nav-active .navmenu>ul {
     display: block;
+  }
+
+  /* Bouton Se Connecter - Mobile */
+  .navmenu .btn-get-started {
+    display: block;
+    margin: 10px 20px;
+    text-align: center;
+    background: var(--accent-color);
+    color: var(--contrast-color) !important;
+    padding: 10px 20px !important;
+    border-radius: 50px;
+    font-size: 15px !important;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+  .navmenu .btn-get-started:hover {
+    background: color-mix(in srgb, var(--accent-color), transparent 15%);
+    color: var(--contrast-color) !important;
   }
 }
 

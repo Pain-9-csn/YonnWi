@@ -2,36 +2,49 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="public/templates/templateVitrine/assets/img/logo.png" alt=""> -->
-        <h1 class="sitename"><span>e</span>Startup</h1>
+        <h1 class="sitename">Yoon<span>Wi</span></h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+
+          <!-- Accueil avec dropdown des sections -->
+          <li class="dropdown"><a href="#hero"><i class="bi bi-house"></i>&nbsp; Accueil <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
+              <li><a href="#about"><i class="bi bi-bell"></i>&nbsp; Rappels</a></li>
+              <li><a href="#services"><i class="bi bi-grid"></i>&nbsp; Fonctionnalités</a></li>
+              <li><a href="#features"><i class="bi bi-stars"></i>&nbsp; Actualités</a></li>
+              <li><a href="#pricing"><i class="bi bi-lightbulb"></i>&nbsp; Recommandations</a></li>
+              <li><a href="#faq"><i class="bi bi-question-circle"></i>&nbsp; FAQ</a></li>
+              <li><a href="#contact"><i class="bi bi-envelope"></i>&nbsp; Contact</a></li>
             </ul>
           </li>
-          <li><a href="#contact">Contact</a></li>
+
+          <!-- Accueil avec dropdown des sections -->
+          <li class="dropdown"><a href="#coran"><i class="bi bi-house"></i>&nbsp; Coran <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#khassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF </a></li>
+              <li><a href="#lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
+              <li><a href="#saisie-vocale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
+              <li><a href="#horaire"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
+              <li><a href="#qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
+            </ul>
+          </li>
+          </li>
+
+          <!-- Langue en dropdown -->
+          <li class="dropdown"><a href="#"><i class="bi bi-translate"></i>&nbsp; Langue <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#"><i class="bi bi-flag"></i>&nbsp; Français</a></li>
+              <li><a href="#"><i class="bi bi-flag"></i>&nbsp; Wolof</a></li>
+              <li><a href="#"><i class="bi bi-flag"></i>&nbsp; Arabe</a></li>
+              <li><a href="#"><i class="bi bi-flag"></i>&nbsp; Anglais</a></li>
+            </ul>
+          </li>
+
+          <!-- Bouton Se Connecter -->
+          <li><a href="#login" class="btn-get-started"><i class="bi bi-person-circle"></i>&nbsp; Se Connecter</a></li>
+
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
