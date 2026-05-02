@@ -10,11 +10,7 @@
 
         <div class="row gy-5 justify-content-between">
 
-          <div class="col-xl-5" data-aos="zoom-out" data-aos-delay="100">
-            <img src="public/templates/templateVitrine/assets/public/templates/templateVitrine/assets/img//template/eStartup/features.svg" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-xl-6 d-flex">
+          
             <div class="row align-self-center gy-4">
 
               <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
@@ -60,7 +56,6 @@
               </div><!-- End Feature Item -->
 
             </div>
-          </div>
 
         </div>
 
