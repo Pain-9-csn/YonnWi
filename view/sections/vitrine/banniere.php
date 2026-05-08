@@ -9,7 +9,7 @@
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2">
-            <img src="public/templates/templateVitrine/assets/img/hero-img.png" class="img-fluid" alt="">
+            <img src="public/templates/templateVitrine/assets/img/serigne-touba.jfif" class="img-fluid" alt="">
           </div>
         </div>
       </div>

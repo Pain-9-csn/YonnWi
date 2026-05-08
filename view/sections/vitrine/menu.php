@@ -21,17 +21,15 @@
           </li>
 
           <!-- Accueil avec dropdown des sections -->
-          <li class="dropdown"><a href="#coran"><i class="bi bi-house"></i>&nbsp; Coran <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#khassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF </a></li>
-              <li><a href="#lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
-              <li><a href="#saisie-vocale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
-              <li><a href="#horaire"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
-              <li><a href="#qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
-            </ul>
-          </li>
-          </li>
-
+          <ul>
+            <li><a href="#coran"><i class="bi bi-house"></i>&nbsp; Coran</a></li>
+            <li><a href="#khassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF </a></li>
+            <li><a href="#lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
+            <li><a href="#saisie-vocale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
+            <li><a href="#horaire"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
+            <li><a href="#qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
+          </ul>
+          &nbsp; &nbsp;
           <!-- Langue en dropdown -->
           <li class="dropdown"><a href="#"><i class="bi bi-translate"></i>&nbsp; Langue <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -43,7 +41,7 @@
           </li>
 
           <!-- Bouton Se Connecter -->
-          <li><a href="#login" class="btn-get-started"><i class="bi bi-person-circle"></i>&nbsp; Se Connecter</a></li>
+          <li>&nbsp; &nbsp;<a href="#login" class="btn-get-started"><i class="bi bi-person-circle"></i>&nbsp; &nbsp;Se Connecter</a></li>
 
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
