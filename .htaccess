@@ -1,6 +1,7 @@
 RewriteEngine On
 RewriteRule ^admin$ admin.php
 RewriteRule ^home$ index.php
+RewriteRule ^login$ login.php
 # view 
 #xassida
 RewriteRule ^listeXassida$ view/pages/admin/xassida/listeXassida.php
