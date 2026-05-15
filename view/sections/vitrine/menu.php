@@ -1,7 +1,16 @@
+<?php
+// S'assurer que la session est démarrée
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$estConnecte = isset($_SESSION['utilisateur_id']);
+$nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
+?>
+
 <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <h1 class="sitename">Yoon<span>Wi</span></h1>
       </a>
 
@@ -20,16 +29,17 @@
             </ul>
           </li>
 
-          <!-- Accueil avec dropdown des sections -->
+          <!-- Liens principaux -->
           <ul>
             <li><a href="#coran"><i class="bi bi-house"></i>&nbsp; Coran</a></li>
-            <li><a href="#khassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF </a></li>
+            <li><a href="#khassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
             <li><a href="#lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
             <li><a href="#saisie-vocale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
             <li><a href="#horaire"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
             <li><a href="#qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
           </ul>
           &nbsp; &nbsp;
+
           <!-- Langue en dropdown -->
           <li class="dropdown"><a href="#"><i class="bi bi-translate"></i>&nbsp; Langue <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -40,8 +50,19 @@
             </ul>
           </li>
 
-          <!-- Bouton Se Connecter -->
-          <li>&nbsp; &nbsp;<a href="#login" class="btn-get-started"><i class="bi bi-person-circle"></i>&nbsp; &nbsp;Se Connecter</a></li>
+          <!-- Bouton connecté / déconnecté -->
+          <?php if ($estConnecte): ?>
+            <li class="dropdown">&nbsp; &nbsp;
+              <a href="#" class="btn-get-started">
+                <i class="bi bi-person-check-fill"></i>&nbsp; <?= htmlspecialchars($nomUtilisateur) ?> <i class="bi bi-chevron-down toggle-dropdown"></i>
+              </a>
+              <ul>
+                <li><a href="index.php?action=logout"><i class="bi bi-box-arrow-right"></i>&nbsp; Se Déconnecter</a></li>
+              </ul>
+            </li>
+          <?php else: ?>
+            <li>&nbsp; &nbsp;<a href="login.php" class="btn-get-started"><i class="bi bi-person-circle"></i>&nbsp; &nbsp;Se Connecter</a></li>
+          <?php endif; ?>
 
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
