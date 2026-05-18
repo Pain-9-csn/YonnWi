@@ -58,6 +58,7 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
               </a>
               <ul>
                 <li><a href="index.php?action=logout"><i class="bi bi-box-arrow-right"></i>&nbsp; Se Déconnecter</a></li>
+                <li><a href="index.php?action=logout"><i class="bi bi-clock-history"></i>Historique</a></li>
               </ul>
             </li>
           <?php else: ?>

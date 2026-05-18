@@ -12,7 +12,7 @@ if ($controller->isLoggedIn()) {
     exit;
 }
 
-$error  = '';
+$erreur  = '';
 $succes  = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,19 +22,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirm  = $_POST['confirm'] ?? '';
 
     if (empty($nom) || empty($email) || empty($password) || empty($confirm)) {
-        $error = 'Veuillez remplir tous les champs.';
+        $erreur = 'Veuillez remplir tous les champs.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Adresse email invalide.';
+        $erreur = 'Adresse email invalide.';
     } elseif (strlen($password) < 6) {
-        $error = 'Le mot de passe doit contenir au moins 6 caractères.';
+        $erreur = 'Le mot de passe doit contenir au moins 6 caractères.';
     } elseif ($password !== $confirm) {
-        $error = 'Les mots de passe ne correspondent pas.';
+        $erreur = 'Les mots de passe ne correspondent pas.';
     } else {
         $resultat = $controller->register($nom, $email, $password);
         if ($resultat['success']) {
             $succes = 'Compte créé avec succès ! Vous pouvez vous connecter.';
         } else {
-            $error = $resultat['erreur'];
+            $erreur = $resultat['erreur'];
         }
     }
 }
@@ -260,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </p>
 
                     <p style="text-align:center; margin-top: 8px;">
-                        <a href="login.php">Déjà un compte ? Se connecter</a>
+                        <a href="login.php"></a>
                     </p>
 
                 </form>
