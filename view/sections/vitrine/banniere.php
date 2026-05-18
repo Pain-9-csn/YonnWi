@@ -5,10 +5,11 @@
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
             <h2>YoonWi</h2>
             <p>Accédez à vos khassidas, au Coran et à bien d'autres contenus spirituels en un seul endroit. YoonWi vous accompagne dans votre pratique religieuse au quotidien.</p>            <div class="d-flex">
-              <a href="#about" class="btn-get-started">Commencez votre aventure</a>
+              <a href="#about" class="btn-get-started"><i class="bi bi-play-circle"></i><span> Commencez votre aventure</span></a>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2">
+            <!-- <img src="" class="img-fluid" alt=""> -->
           </div>
         </div>
       </div>

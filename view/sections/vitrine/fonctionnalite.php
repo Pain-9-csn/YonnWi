@@ -1,5 +1,4 @@
 <section id="services" class="services section">
-
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Fonctionnalités</h2>
