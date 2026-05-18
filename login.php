@@ -15,18 +15,54 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email    = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
 
-    if (empty($email) || empty($password)) {
-        $error = 'Veuillez remplir tous les champs.';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Adresse email invalide.';
-    } else {
-        $resultat = $controller->login($email, $password);
-        if ($resultat['success']) {
-            header('Location: index.php');
-            exit;
+    // LOGIN
+    if (isset($_POST['login'])) {
+
+        $email    = trim($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+
+        if (empty($email) || empty($password)) {
+
+            $error = "Veuillez remplir tous les champs.";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            $error = "Adresse email invalide.";
+        } else {
+
+            $resultat = $controller->login($email, $password);
+
+            if ($resultat['success']) {
+
+                header('Location: index.php');
+                exit;
+            } else {
+
+                $error = $resultat['erreur'];
+            }
+        }
+    }
+
+    // REGISTER
+    if (isset($_POST['register'])) {
+
+        $nom      = trim($_POST['nom'] ?? '');
+        $email    = trim($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+        $confirm  = $_POST['confirm'] ?? '';
+
+        if (empty($nom) || empty($email) || empty($password) || empty($confirm)) {
+
+            $error = "Veuillez remplir tous les champs.";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            $error = "Adresse email invalide.";
+        } elseif (strlen($password) < 6) {
+
+            $error = "Le mot de passe doit contenir au moins 6 caractères.";
+        } elseif ($password !== $confirm) {
+
+            $error = "Les mots de passe ne correspondent pas.";
         } else {
 
             $resultat = $controller->register($nom, $email, $password);
@@ -486,38 +522,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 <?php endif; ?>
 
-                <form method="POST" action="login.php" novalidate>
+                <?php if ($success): ?>
+                    <div class="alert success">
+                        <?= htmlspecialchars($success) ?>
+                    </div>
+                <?php endif; ?>
 
-                    <p>
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Adresse email"
-                            value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
-                            required
-                            autocomplete="email"
-                        />
-                    </p>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Adresse email"
+                    required>
 
-                    <p>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Mot de passe"
-                            required
-                            autocomplete="current-password"
-                        />
-                    </p>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Mot de passe"
+                    required>
 
-                    <p>
-                        <input class="btn" type="submit" value="Se Connecter" />
-                    </p>
+                <button type="submit" name="login">
+                    Se connecter
+                </button>
 
-                    <p>
-                        <a href="register.php">Créer un compte</a>
-                    </p>
+            </form>
 
-                </form>
+        </div>
+
+        <!-- REGISTER -->
+
+        <div class="form-container sign-up">
+
+            <form method="POST">
+
+                <h2>Inscription</h2>
+
+                <p class="subtitle">
+                    Rejoignez la communauté YoonWi
+                </p>
+
+                <input
+                    type="text"
+                    name="nom"
+                    placeholder="Nom complet"
+                    required>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Adresse email"
+                    required>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Mot de passe"
+                    required>
+
+                <input
+                    type="password"
+                    name="confirm"
+                    placeholder="Confirmer le mot de passe"
+                    required>
+
+                <button type="submit" name="register">
+                    S'inscrire
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- OVERLAY -->
+
+        <div class="overlay">
+
+            <div class="overlay-content">
+
+                <div class="logo">
+                    ☪
+                </div>
+
+                <h1>YoonWi</h1>
+
+                <p id="overlayText">
+                    Une plateforme inspirée des valeurs islamiques et mourides.
+                </p>
+
+                <button class="switch-btn" id="switchBtn">
+                    S'inscrire
+                </button>
+
             </div>
 
         </div>
