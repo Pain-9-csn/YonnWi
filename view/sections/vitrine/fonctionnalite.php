@@ -38,7 +38,7 @@
               <div class="icon">
                 <i class="bi bi-clock"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="index.php?action=horairesprieres" class="stretched-link">
                 <h3>Heures de Prière</h3>
               </a>
               <p>Consultez les horaires de prière selon votre localisation. Recevez des notifications automatiques pour chaque prière de la journée.</p>

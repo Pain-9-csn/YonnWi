@@ -18,35 +18,35 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
         <ul>
 
           <!-- Accueil avec dropdown des sections -->
-          <li class="dropdown"><a href="#hero"><i class="bi bi-house"></i>&nbsp; Accueil <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="index.php"><i class="bi bi-house"></i>&nbsp; Accueil <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#about"><i class="bi bi-bell"></i>&nbsp; Rappels</a></li>
-              <li><a href="#services"><i class="bi bi-grid"></i>&nbsp; Fonctionnalités</a></li>
-              <li><a href="#features"><i class="bi bi-stars"></i>&nbsp; Actualités</a></li>
-              <li><a href="#pricing"><i class="bi bi-lightbulb"></i>&nbsp; Recommandations</a></li>
-              <li><a href="#faq"><i class="bi bi-question-circle"></i>&nbsp; FAQ</a></li>
-              <li><a href="#contact"><i class="bi bi-envelope"></i>&nbsp; Contact</a></li>
+              <li><a href="index.php#about"><i class="bi bi-bell"></i>&nbsp; Rappels</a></li>
+              <li><a href="index.php#services"><i class="bi bi-grid"></i>&nbsp; Fonctionnalités</a></li>
+              <li><a href="index.php#features"><i class="bi bi-stars"></i>&nbsp; Actualités</a></li>
+              <li><a href="index.php#pricing"><i class="bi bi-lightbulb"></i>&nbsp; Recommandations</a></li>
+              <li><a href="index.php#faq"><i class="bi bi-question-circle"></i>&nbsp; FAQ</a></li>
+              <li><a href="index.php#contact"><i class="bi bi-envelope"></i>&nbsp; Contact</a></li>
             </ul>
           </li>
 
           <!-- Liens principaux -->
           <ul>
-            <li><a href="#coran"><i class="bi bi-house"></i>&nbsp; Coran</a></li>
-            <li><a href="#khassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
-            <li><a href="#lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
-            <li><a href="#saisie-vocale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
-            <li><a href="#horaire"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
-            <li><a href="#qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
+            <li><a href="index.php?action=coran"><i class="bi bi-book"></i>&nbsp; Coran</a></li>
+            <li><a href="index.php?action=xassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
+            <li><a href="index.php?action=lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
+            <li><a href="index.php?action=saisievo cale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
+            <li><a href="index.php?action=horairesprieres"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
+            <li><a href="index.php?action=qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
           </ul>
           &nbsp; &nbsp;
 
           <!-- Langue en dropdown -->
           <li class="dropdown"><a href="#"><i class="bi bi-translate"></i>&nbsp; Langue <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#"><i class="bi bi-flag"></i>&nbsp; Français</a></li>
-              <li><a href="#"><i class="bi bi-flag"></i>&nbsp; Wolof</a></li>
-              <li><a href="#"><i class="bi bi-flag"></i>&nbsp; Arabe</a></li>
-              <li><a href="#"><i class="bi bi-flag"></i>&nbsp; Anglais</a></li>
+              <li><a href="index.php?action=langue&lang=fr"><i class="bi bi-flag"></i>&nbsp; 🇫🇷 Français</a></li>
+              <li><a href="index.php?action=langue&lang=wo"><i class="bi bi-flag"></i>&nbsp; 🇸🇳 Wolof</a></li>
+              <li><a href="index.php?action=langue&lang=ar"><i class="bi bi-flag"></i>&nbsp; 🇸🇦 Arabe</a></li>
+              <li><a href="index.php?action=langue&lang=en"><i class="bi bi-flag"></i>&nbsp; 🇬🇧 Anglais</a></li>
             </ul>
           </li>
 
@@ -58,7 +58,7 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
               </a>
               <ul>
                 <li><a href="index.php?action=logout"><i class="bi bi-box-arrow-right"></i>&nbsp; Se Déconnecter</a></li>
-                <li><a href="index.php?action=logout"><i class="bi bi-clock-history"></i>Historique</a></li>
+                <li><a href="index.php?action=historique"><i class="bi bi-clock-history"></i>&nbsp; Historique</a></li>
               </ul>
             </li>
           <?php else: ?>

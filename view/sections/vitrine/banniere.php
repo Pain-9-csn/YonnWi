@@ -35,7 +35,7 @@
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-clock"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Heures de Prière</a></h4>
+                <h4 class="title"><a href="index.php?action=horairesprieres" class="stretched-link">Heures de Prière</a></h4>
               </div>
             </div>
 
