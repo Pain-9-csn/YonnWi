@@ -3,7 +3,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Rappels</h2>
-        <div><span>Découvrez</span> <span class="description-title">Nos Rappels</span></div>
+        <div> <span>Soutenez votre foi avec</span><span class="description-title"> nos rappels quotidiens</span></div>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -11,7 +11,6 @@
         <div class="row gy-4">
 
           <div class="col-lg-12 content" data-aos="fade-up" data-aos-delay="100">
-            <p class="who-we-are"> Soutenez votre foi avec nos rappels quotidiens</p>
             <p class="fst-italic">
               YoonWi vous envoie chaque jour des rappels spirituels pour vous aider à rester proche de votre religion, où que vous soyez.
             </p>
