@@ -335,11 +335,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             position: absolute;
             top: 40px;
-            right: 50px;
+            right: 50px;                                                        
 
             font-size: 180px;
             color: rgba(255, 255, 255, .08);
-
             font-weight: bold;
         }
 

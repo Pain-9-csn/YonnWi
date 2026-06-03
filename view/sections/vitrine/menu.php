@@ -10,7 +10,7 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
 <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.php" class="logo d-flex align-items-center">
+      <a href="Home" class="logo d-flex align-items-center">
         <h1 class="sitename">Yoon<span>Wi</span></h1>
       </a>
 
@@ -18,7 +18,7 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
         <ul>
 
           <!-- Accueil avec dropdown des sections -->
-          <li class="dropdown"><a href="#hero"><i class="bi bi-house"></i>&nbsp; Accueil <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="Home"><i class="bi bi-house"></i>&nbsp; Accueil <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#about"><i class="bi bi-bell"></i>&nbsp; Rappels</a></li>
               <li><a href="#services"><i class="bi bi-grid"></i>&nbsp; Fonctionnalités</a></li>
@@ -31,12 +31,12 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
 
           <!-- Liens principaux -->
           <ul>
-            <li><a href="#coran"><i class="bi bi-house"></i>&nbsp; Coran</a></li>
-            <li><a href="#khassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
-            <li><a href="#lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
-            <li><a href="#saisie-vocale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
+            <li><a href="Coran"><i class="bi bi-house"></i>&nbsp; Coran</a></li>
+            <li><a href=""><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
+            <li><a href="Lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
+            <li><a href="Dictaphone"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
             <li><a href="#horaire"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
-            <li><a href="#qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
+            <li><a href="Qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
           </ul>
           &nbsp; &nbsp;
 
