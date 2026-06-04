@@ -1,8 +1,8 @@
 RewriteEngine On
 RewriteRule ^admin$ admin.php
-RewriteRule ^home$ index.php
+RewriteRule ^Home$ index.php
 RewriteRule ^login$ login.php
-# view 
+# view  admin
 #xassida
 RewriteRule ^listeXassida$ view/pages/admin/xassida/listeXassida.php
 RewriteRule ^corbeilleXassida$ view/pages/admin/xassida/corbeilleXassida.php
@@ -35,3 +35,12 @@ RewriteRule ^listePara$ view/pages/admin/parametres/settings.php
 #NEWSLETTERS 
 RewriteRule ^listeNews$ view/pages/admin/newsletters/listeNews.php
 RewriteRule ^corbeilleNews$ view/pages/admin/newsletters/corbeilleNews.php
+# View vitrine 
+############Coran###################
+RewriteRule ^Coran$ view/pages/vitrine/coran/coran.php
+###############Dictaphone################
+RewriteRule ^Dictaphone$ view/pages/vitrine/dictaphone/voc.php
+################Lecteur#############
+RewriteRule ^Lecteur$ view/pages/vitrine/lecteur/lecteur.php
+###############Qibla##############
+RewriteRule ^Qibla$ view/pages/vitrine/qibla/qibla.php
