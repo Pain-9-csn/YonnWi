@@ -4,161 +4,189 @@ class HorairePrieresController
 {
     public function index()
     {
-
-        // =========================================
-        // SESSION
-        // =========================================
-
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // =========================================
-        // ERREURS
-        // =========================================
-
         ini_set('display_errors', 1);
-
         error_reporting(E_ALL);
 
-        // =========================================
-        // VARIABLES
-        // =========================================
+        $lang = $_SESSION['lang'] ?? 'fr';
 
-        $ville =
-            $_GET['ville']
-            ?? 'Dakar';
+        $ville     = $_GET['ville'] ?? 'Dakar';
+        $pays      = $_GET['pays'] ?? 'Senegal';
+        $latitude  = $_GET['latitude'] ?? null;
+        $longitude = $_GET['longitude'] ?? null;
 
-        $pays =
-            $_GET['pays']
-            ?? 'Senegal';
-
-        $latitude =
-            $_GET['latitude']
-            ?? null;
-
-        $longitude =
-            $_GET['longitude']
-            ?? null;
-
-        // =========================================
-        // API URL
-        // =========================================
+        // =====================
+        // API
+        // =====================
 
         if ($latitude && $longitude) {
 
             $apiUrl =
                 "https://api.aladhan.com/v1/timings?"
-                . "latitude="
-                . urlencode($latitude)
-                . "&longitude="
-                . urlencode($longitude)
-                . "&method=2";
+                ."latitude=".urlencode($latitude)
+                ."&longitude=".urlencode($longitude)
+                ."&method=2";
 
         } else {
 
             $apiUrl =
                 "https://api.aladhan.com/v1/timingsByCity?"
-                . "city="
-                . urlencode($ville)
-                . "&country="
-                . urlencode($pays)
-                . "&method=2";
-
+                ."city=".urlencode($ville)
+                ."&country=".urlencode($pays)
+                ."&method=2";
         }
-
-        // =========================================
-        // API
-        // =========================================
 
         $response =
             @file_get_contents($apiUrl);
 
-        // =========================================
-        // JSON
-        // =========================================
-
         $apiData = [];
 
         if ($response) {
-
             $apiData =
-                json_decode($response, true);
-
+                json_decode($response,true);
         }
 
-        // =========================================
-        // VARIABLES VUE
-        // =========================================
-
-        $timings = [];
-
-        $dateGreg = '';
-
+        $timings   = [];
+        $dateGreg  = '';
         $dateHijri = '';
+        $timezone  = 'Africa/Dakar';
 
-        $timezone = 'Africa/Dakar';
-
-        // =========================================
-        // DONNEES
-        // =========================================
+        // =====================
+        // DATA API
+        // =====================
 
         if (
-            isset($apiData['data'])
-            &&
+            isset($apiData['data']) &&
             isset($apiData['data']['timings'])
         ) {
 
             $timings =
                 $apiData['data']['timings'];
 
-            $dateGreg =
-                $apiData['data']['date']['readable'];
-
             $dateHijri =
                 $apiData['data']['date']['hijri']['date'];
 
-            if (
-                isset(
-                    $apiData['data']['meta']['timezone']
-                )
-            ) {
+            $timezone =
+                $apiData['data']['meta']['timezone']
+                ?? 'Africa/Dakar';
 
-                $timezone =
-                    $apiData['data']['meta']['timezone'];
+            $dateAPI =
+                $apiData['data']['date']['gregorian']['date']
+                ?? date('d-m-Y');
 
+            $dateObj =
+                DateTime::createFromFormat(
+                    'd-m-Y',
+                    $dateAPI
+                );
+
+            $months = [
+
+                'fr'=>[
+                    'January'=>'Janvier',
+                    'February'=>'Février',
+                    'March'=>'Mars',
+                    'April'=>'Avril',
+                    'May'=>'Mai',
+                    'June'=>'Juin',
+                    'July'=>'Juillet',
+                    'August'=>'Août',
+                    'September'=>'Septembre',
+                    'October'=>'Octobre',
+                    'November'=>'Novembre',
+                    'December'=>'Décembre'
+                ],
+
+                'en'=>[
+                    'January'=>'January',
+                    'February'=>'February',
+                    'March'=>'March',
+                    'April'=>'April',
+                    'May'=>'May',
+                    'June'=>'June',
+                    'July'=>'July',
+                    'August'=>'August',
+                    'September'=>'September',
+                    'October'=>'October',
+                    'November'=>'November',
+                    'December'=>'December'
+                ],
+
+                'ar'=>[
+                    'January'=>'يناير',
+                    'February'=>'فبراير',
+                    'March'=>'مارس',
+                    'April'=>'أبريل',
+                    'May'=>'مايو',
+                    'June'=>'يونيو',
+                    'July'=>'يوليو',
+                    'August'=>'أغسطس',
+                    'September'=>'سبتمبر',
+                    'October'=>'أكتوبر',
+                    'November'=>'نوفمبر',
+                    'December'=>'ديسمبر'
+                ],
+
+                'wo'=>[
+                    'January'=>'Samwiye',
+                    'February'=>'Fewriye',
+                    'March'=>'Mars',
+                    'April'=>'Awril',
+                    'May'=>'Mee',
+                    'June'=>'Suwe',
+                    'July'=>'Sulet',
+                    'August'=>'Ut',
+                    'September'=>'Sàttumbar',
+                    'October'=>'Oktoobar',
+                    'November'=>'Nowàmbar',
+                    'December'=>'Desàmbar'
+                ]
+
+            ];
+
+            if ($dateObj) {
+
+                $formatted =
+                    $dateObj->format('d F Y');
+
+                $dateGreg =
+                    str_replace(
+
+                        array_keys(
+                            $months[$lang]
+                            ?? $months['fr']
+                        ),
+
+                        array_values(
+                            $months[$lang]
+                            ?? $months['fr']
+                        ),
+
+                        $formatted
+                    );
             }
-
         }
-
-        // =========================================
-        // TIMEZONE DYNAMIQUE
-        // =========================================
 
         date_default_timezone_set($timezone);
 
-        // =========================================
-        // HEURE ACTUELLE
-        // =========================================
+        // =====================
+        // PRIERE ACTIVE
+        // =====================
 
-        $now =
-            date('H:i');
-
-        // =========================================
-        // PRIERES
-        // =========================================
+        $now = date('H:i');
 
         $prieres = [
+
             'Fajr',
             'Dhuhr',
             'Asr',
             'Maghrib',
             'Isha'
-        ];
 
-        // =========================================
-        // PRIERE ACTIVE
-        // =========================================
+        ];
 
         $priereActive = 'Fajr';
 
@@ -169,116 +197,152 @@ class HorairePrieresController
             }
 
             if ($now < $timings[$priere]) {
-                $priereActive = $priere;
+
+                $priereActive =
+                    $priere;
+
                 break;
             }
-
         }
-
-        // =========================================
-        // APRES ISHA
-        // =========================================
 
         if ($now > ($timings['Isha'] ?? '23:59')) {
             $priereActive = 'Fajr';
         }
 
-        // =========================================
-        // SECURITE
-        // =========================================
-
         if (empty($timings)) {
 
             $timings = [
-                'Fajr'    => '--:--',
-                'Dhuhr'   => '--:--',
-                'Asr'     => '--:--',
-                'Maghrib' => '--:--',
-                'Isha'    => '--:--',
-                'Sunrise' => '--:--',
-                'Sunset'  => '--:--'
-            ];
 
+                'Fajr'=>'--:--',
+                'Dhuhr'=>'--:--',
+                'Asr'=>'--:--',
+                'Maghrib'=>'--:--',
+                'Isha'=>'--:--',
+                'Sunrise'=>'--:--',
+                'Sunset'=>'--:--'
+
+            ];
         }
 
-        // =========================================
+        // =====================
         // TRADUCTIONS
-        // =========================================
-
-        $lang = $_SESSION['lang'] ?? 'fr';
+        // =====================
 
         $textes = [
 
-            'fr' => [
-                'titre'      => 'Horaires de Prières',
-                'sous_titre' => 'Consultez les horaires quotidiens',
-                'ville'      => 'Ville',
-                'pays'       => 'Pays',
-                'rechercher' => 'Rechercher',
-                'souba'      => 'Souba (Lever)',
-                'coucher'    => 'Coucher',
-                'prochaine'  => 'Prochaine',
-                'dates'      => '📅 Dates Importantes',
-                'activer'    => '🔊 Activer l\'Adhan',
-                'desactiver' => '🔇 Désactiver l\'Adhan',
-                'dir'        => 'ltr',
-            ],
+        'fr'=>[
 
-            'wo' => [
-                'titre'      => 'Waktu Salaate yi',
-                'sous_titre' => 'Xool waktu salaate bu tey',
-                'ville'      => 'Dëkk',
-                'pays'       => 'Réewum',
-                'rechercher' => 'Seet',
-                'souba'      => 'Souba',
-                'coucher'    => 'Timis',
-                'prochaine'  => 'Ci kanam',
-                'dates'      => '📅 Bés yu mel si',
-                'activer'    => '🔊 Jëfandikoo Adhan',
-                'desactiver' => '🔇 Tëj Adhan',
-                'dir'        => 'ltr',
-            ],
+        'titre'=>'Horaires de Prières',
+        'sous_titre'=>'Consultez les horaires quotidiens',
+        'ville'=>'Ville',
+        'pays'=>'Pays',
+        'rechercher'=>'Rechercher',
+        'souba'=>'Souba (Lever)',
+        'coucher'=>'Coucher',
+        'prochaine'=>'Prochaine',
+        'dates'=>'📅 Dates Importantes',
+        'activer'=>'🔊 Activer l\'Adhan',
+        'desactiver'=>'🔇 Désactiver l\'Adhan',
+        'dir'=>'ltr',
+        'dans' => 'dans',
 
-            'ar' => [
-                'titre'      => 'مواقيت الصلاة',
-                'sous_titre' => 'تحقق من مواقيت الصلاة اليومية',
-                'ville'      => 'المدينة',
-                'pays'       => 'البلد',
-                'rechercher' => 'بحث',
-                'souba'      => 'شروق الشمس',
-                'coucher'    => 'غروب الشمس',
-                'prochaine'  => 'القادمة',
-                'dates'      => '📅 المناسبات الإسلامية',
-                'activer'    => '🔊 تفعيل الأذان',
-                'desactiver' => '🔇 إيقاف الأذان',
-                'dir'        => 'rtl',
-            ],
+        'prieres'=>[
+        'Fajr'=>'Fadjr',
+        'Dhuhr'=>'Dohr',
+        'Asr'=>'Asr',
+        'Maghrib'=>'Maghrib',
+        'Isha'=>'Icha'
+        ]
 
-            'en' => [
-                'titre'      => 'Prayer Times',
-                'sous_titre' => 'Check daily prayer times',
-                'ville'      => 'City',
-                'pays'       => 'Country',
-                'rechercher' => 'Search',
-                'souba'      => 'Sunrise',
-                'coucher'    => 'Sunset',
-                'prochaine'  => 'Next',
-                'dates'      => '📅 Important Islamic Dates',
-                'activer'    => '🔊 Enable Adhan',
-                'desactiver' => '🔇 Disable Adhan',
-                'dir'        => 'ltr',
-            ],
+        ],
+
+        'en'=>[
+
+        'titre'=>'Prayer Times',
+        'sous_titre'=>'Check daily prayer times',
+        'ville'=>'City',
+        'pays'=>'Country',
+        'rechercher'=>'Search',
+        'souba'=>'Sunrise',
+        'coucher'=>'Sunset',
+        'prochaine'=>'Next',
+        'dates'=>'📅 Important Dates',
+        'activer'=>'🔊 Enable Adhan',
+        'desactiver'=>'🔇 Disable Adhan',
+        'dir'=>'ltr',
+        'dans' => 'in',
+
+        'prieres'=>[
+        'Fajr'=>'Fajr',
+        'Dhuhr'=>'Dhuhr',
+        'Asr'=>'Asr',
+        'Maghrib'=>'Maghrib',
+        'Isha'=>'Isha'
+        ]
+
+        ],
+
+        'ar'=>[
+
+        'titre'=>'مواقيت الصلاة',
+        'sous_titre'=>'تحقق من المواقيت اليومية',
+        'ville'=>'المدينة',
+        'pays'=>'البلد',
+        'rechercher'=>'بحث',
+        'souba'=>'الشروق',
+        'coucher'=>'الغروب',
+        'prochaine'=>'القادمة',
+        'dates'=>'📅 المناسبات',
+        'activer'=>'🔊 تشغيل الأذان',
+        'desactiver'=>'🔇 إيقاف الأذان',
+        'dir'=>'rtl',
+        'dans' => 'في',
+
+        'prieres'=>[
+        'Fajr'=>'الفجر',
+        'Dhuhr'=>'الظهر',
+        'Asr'=>'العصر',
+        'Maghrib'=>'المغرب',
+        'Isha'=>'العشاء'
+        ]
+
+        ],
+
+        'wo'=>[
+
+        'titre'=>'Waktu Salaate yi',
+        'sous_titre'=>'Xool waktu salaate bu tey',
+        'ville'=>'Dëkk',
+        'pays'=>'Réew',
+        'rechercher'=>'Seet',
+        'souba'=>'Souba',
+        'coucher'=>'Timis',
+        'prochaine'=>'Ci kanam',
+        'dates'=>'📅 Bés yu mel si',
+        'activer'=>'🔊 Jëfandikoo Adhan',
+        'desactiver'=>'🔇 Tëj Adhan',
+        'dir'=>'ltr',
+        'dans' => 'ci ',
+
+        'prieres'=>[
+        'Fajr'=>'Fadjr',
+        'Dhuhr'=>'Tisbar',
+        'Asr'=>'Takussan',
+        'Maghrib'=>'Timis',
+        'Isha'=>'Gué'
+        ]
+
+        ]
 
         ];
 
-        $t = $textes[$lang] ?? $textes['fr'];
+        $traduction = 
+            $textes[$lang]
+            ?? $textes['fr'];
 
-        // =========================================
-        // VUE
-        // =========================================
+            
 
         require_once __DIR__
-            . '/../view/pages/admin/horairesprieres/listeHeuresprieres.php';
-
+        . '/../view/pages/vitrine/horairesprieres/listeHeuresprieres.php';
     }
 }
