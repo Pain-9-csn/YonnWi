@@ -32,8 +32,7 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
           <!-- Liens principaux -->
           <ul>
             <li><a href="index.php?action=coran"><i class="bi bi-book"></i>&nbsp; Coran</a></li>
-            <li><a href="index.php?action=xassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
-            <li><a href="index.php?action=lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
+            <li><a href="index.php?action=khassidapdf"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>            <li><a href="index.php?action=lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
             <li><a href="index.php?action=saisievo cale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
             <li><a href="index.php?action=horairesprieres"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
             <li><a href="index.php?action=qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>

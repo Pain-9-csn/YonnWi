@@ -80,12 +80,22 @@ switch ($action) {
     // ======================
     case 'khassidapdf':
 
-    require_once 'app/controller/KhassidaController.php';
+        require_once __DIR__ . '/controller/XassidaController.php';
 
-    $controller = new KhassidaController();
+        $controller = new KhassidaController();
 
-    $controller->index();
+        $controller->index();
 
+    break;
+
+    // ======================
+    // Douas & Invocations
+    // ======================
+
+    case 'douas':
+        require_once __DIR__ . '/controller/DouasController.php';
+        $controller = new DouasController();
+        $controller->index();
     break;
 
 

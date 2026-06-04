@@ -42,7 +42,7 @@
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-heart"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Douas & Invocations</a></h4>
+                <h4 class="title"><a href="index.php?action=douas" class="stretched-link">Douas & Invocations</a></h4>
               </div>
             </div>
 
