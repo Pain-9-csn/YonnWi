@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr" dir="<?= $t['dir'] ?>">
+<html lang="fr" dir="<?= htmlspecialchars($t['dir']) ?>">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($t['titre']) ?> — YonnWi</title>
+    <title><?= htmlspecialchars($t['titre']) ?> &mdash; YonnWi</title>
 
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <link href="public/templates/templateVitrine/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="public/templates/templateVitrine/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -20,8 +19,8 @@
         :root {
             --accent: #71c55d;
             --accent-dark: #5fb04d;
-            --accent-light: color-mix(in srgb, var(--accent), white 88%);
-            --accent-border: color-mix(in srgb, var(--accent), transparent 72%);
+            --accent-light: #eaf7e6;
+            --accent-border: rgba(113, 197, 93, .28);
             --text-main: #1f2937;
             --text-muted: #6b7280;
             --bg-card: #ffffff;
@@ -37,10 +36,9 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        /* ── HERO ── */
         .coran-hero {
-            background: linear-gradient(135deg,
-                    color-mix(in srgb, var(--accent), white 82%) 0%,
-                    color-mix(in srgb, var(--accent), white 92%) 100%);
+            background: linear-gradient(135deg, #dff5d8 0%, #edfae8 100%);
             border-bottom: 1px solid var(--accent-border);
             padding: 56px 0 40px;
             text-align: center;
@@ -65,29 +63,23 @@
             margin: 8px 0 0;
         }
 
+        /* ── LAYOUT PRINCIPAL ── */
         .coran-wrap {
             display: grid;
             grid-template-columns: 300px 1fr;
             gap: 24px;
             max-width: 1200px;
             margin: 32px auto;
-            padding: 0 20px 60px;
+            padding: 0 20px 80px;
         }
 
         @media (max-width: 900px) {
             .coran-wrap {
                 grid-template-columns: 1fr;
             }
-
-            .sidebar-sourates {
-                display: none;
-            }
-
-            .sidebar-sourates.open {
-                display: block;
-            }
         }
 
+        /* ── SIDEBAR ── */
         .sidebar-sourates {
             background: var(--bg-card);
             border: 1px solid var(--accent-border);
@@ -99,6 +91,18 @@
             max-height: calc(100vh - 110px);
             display: flex;
             flex-direction: column;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar-sourates {
+                display: none;
+                position: static;
+                max-height: 400px;
+            }
+
+            .sidebar-sourates.open {
+                display: flex;
+            }
         }
 
         .sidebar-header {
@@ -125,6 +129,7 @@
             outline: none;
             background: #fff;
             color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
             transition: border-color .25s;
         }
 
@@ -136,6 +141,15 @@
             overflow-y: auto;
             flex: 1;
             padding: 8px 0;
+        }
+
+        .liste-sourates::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .liste-sourates::-webkit-scrollbar-thumb {
+            background: var(--accent-border);
+            border-radius: 4px;
         }
 
         .sourate-item {
@@ -192,7 +206,7 @@
             text-overflow: ellipsis;
         }
 
-        .sourate-meta-small {
+        .sourate-meta-sm {
             font-size: .72rem;
             color: var(--text-muted);
         }
@@ -204,12 +218,39 @@
             flex-shrink: 0;
         }
 
+        /* ── ZONE LECTURE ── */
         .zone-lecture {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
+        /* Bouton mobile */
+        .btn-menu-sourates {
+            display: none;
+            width: 100%;
+            padding: 12px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: .9rem;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .btn-menu-sourates {
+                display: flex;
+            }
+        }
+
+        /* Header sourate */
         .sourate-header-card {
             background: var(--bg-card);
             border: 1px solid var(--accent-border);
@@ -220,22 +261,24 @@
             align-items: center;
             justify-content: space-between;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .sourate-header-card .nom-arabe {
+        .nom-arabe {
             font-family: 'Amiri', serif;
             font-size: 2.2rem;
             color: var(--accent-dark);
             line-height: 1;
         }
 
-        .sourate-header-card .nom-latin {
+        .nom-latin {
             font-size: 1.25rem;
             font-weight: 600;
             color: var(--text-main);
+            margin-top: 4px;
         }
 
-        .sourate-header-card .badge-type {
+        .badge-type {
             font-size: .72rem;
             padding: 3px 10px;
             border-radius: 20px;
@@ -243,6 +286,7 @@
             color: var(--accent-dark);
             background: var(--accent-light);
             font-weight: 500;
+            margin-left: 8px;
         }
 
         .sourate-stats {
@@ -266,6 +310,7 @@
             color: var(--text-muted);
         }
 
+        /* Bismillah */
         .bismillah-card {
             background: var(--accent-light);
             border: 1px solid var(--accent-border);
@@ -278,6 +323,7 @@
             letter-spacing: .05em;
         }
 
+        /* Verset */
         .verset-card {
             background: var(--bg-card);
             border: 1px solid var(--accent-border);
@@ -285,12 +331,11 @@
             padding: 22px 24px;
             box-shadow: var(--shadow-sm);
             transition: box-shadow .2s, border-color .2s;
-            position: relative;
         }
 
         .verset-card:hover {
             box-shadow: var(--shadow-md);
-            border-color: color-mix(in srgb, var(--accent), transparent 55%);
+            border-color: rgba(113, 197, 93, .45);
         }
 
         .verset-header {
@@ -358,6 +403,7 @@
             line-height: 1.7;
         }
 
+        /* Spinner */
         .loading-versets {
             text-align: center;
             padding: 60px 20px;
@@ -370,52 +416,17 @@
             border: 3px solid var(--accent-light);
             border-top-color: var(--accent);
             border-radius: 50%;
-            animation: spin .7s linear infinite;
+            animation: spn .7s linear infinite;
             margin: 0 auto 16px;
         }
 
-        @keyframes spin {
+        @keyframes spn {
             to {
                 transform: rotate(360deg);
             }
         }
 
-        .btn-menu-sourates {
-            display: none;
-            width: 100%;
-            padding: 12px;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: .9rem;
-            cursor: pointer;
-            margin-bottom: 16px;
-        }
-
-        @media (max-width: 900px) {
-            .btn-menu-sourates {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                justify-content: center;
-            }
-        }
-
-        .liste-sourates::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .liste-sourates::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .liste-sourates::-webkit-scrollbar-thumb {
-            background: var(--accent-border);
-            border-radius: 4px;
-        }
-
+        /* Barre audio fixe */
         .audio-bar {
             position: fixed;
             bottom: 0;
@@ -459,23 +470,27 @@
 
 <body class="index-page">
 
-    <?php require_once '../view/sections/vitrine/menu.php'; ?>
+    <?php require_once 'view/sections/vitrine/menu.php'; ?>
 
+    <!-- HERO -->
     <section class="coran-hero" data-aos="fade-down">
         <div class="container">
             <h1><?= htmlspecialchars($t['titre']) ?></h1>
             <p><?= htmlspecialchars($t['sous_titre']) ?></p>
-            <div class="hero-bismillah"><?= $t['bismillah'] ?></div>
+            <div class="hero-bismillah"><?= htmlspecialchars($t['bismillah']) ?></div>
         </div>
     </section>
 
+    <!-- LAYOUT PRINCIPAL -->
     <div class="coran-wrap">
 
+        <!-- Bouton menu mobile -->
         <button class="btn-menu-sourates" onclick="toggleSidebar()">
             <i class="bi bi-list-ul"></i>
             <?= htmlspecialchars($t['sourates']) ?>
         </button>
 
+        <!-- SIDEBAR SOURATES -->
         <aside class="sidebar-sourates" id="sidebarSourates">
             <div class="sidebar-header">
                 <h6><?= htmlspecialchars($t['sourates']) ?></h6>
@@ -486,46 +501,52 @@
                     placeholder="<?= htmlspecialchars($t['recherche']) ?>"
                     oninput="filtrerSourates(this.value)">
             </div>
-            <div class="liste-sourates" id="listeSourates">
 
+            <div class="liste-sourates" id="listeSourates">
                 <?php if (!empty($listeSourates)): ?>
-                    <?php foreach ($listeSourates as $s): ?>
+                    <?php foreach ($listeSourates as $s):
+                        $num    = (int)($s['number'] ?? 0);
+                        $nomFr  = htmlspecialchars($s['englishName'] ?? '');
+                        $nomAr  = htmlspecialchars($s['name'] ?? '');
+                        $nbAy   = (int)($s['numberOfAyahs'] ?? 0);
+                        $type   = ($s['revelationType'] ?? '') === 'Meccan'
+                            ? htmlspecialchars($t['mecquoise'])
+                            : htmlspecialchars($t['medinoise']);
+                        $active = ($num === $sourate) ? 'active' : '';
+                        $nomLow = strtolower($s['englishName'] ?? '');
+                    ?>
                         <div
-                            class="sourate-item <?= (int)$s['number'] === $sourate ? 'active' : '' ?>"
-                            data-num="<?= (int)$s['number'] ?>"
-                            data-nom="<?= strtolower(htmlspecialchars($s['englishName'] ?? '')) ?>"
-                            onclick="chargerSourate(<?= (int)$s['number'] ?>)">
-                            <div class="sourate-num"><?= (int)$s['number'] ?></div>
+                            class="sourate-item <?= $active ?>"
+                            data-num="<?= $num ?>"
+                            data-nom="<?= htmlspecialchars($nomLow) ?>"
+                            onclick="chargerSourate(<?= $num ?>)">
+                            <div class="sourate-num"><?= $num ?></div>
                             <div class="sourate-info">
-                                <div class="sourate-nom-fr"><?= htmlspecialchars($s['englishName'] ?? '') ?></div>
-                                <div class="sourate-meta-small">
-                                    <?= (int)($s['numberOfAyahs'] ?? 0) ?> <?= htmlspecialchars($t['versets']) ?>
-                                    · <?= ($s['revelationType'] ?? '') === 'Meccan'
-                                            ? htmlspecialchars($t['mecquoise'])
-                                            : htmlspecialchars($t['medinoise']) ?>
-                                </div>
+                                <div class="sourate-nom-fr"><?= $nomFr ?></div>
+                                <div class="sourate-meta-sm"><?= $nbAy ?> <?= htmlspecialchars($t['versets']) ?> &middot; <?= $type ?></div>
                             </div>
-                            <div class="sourate-nom-ar"><?= htmlspecialchars($s['name'] ?? '') ?></div>
+                            <div class="sourate-nom-ar"><?= $nomAr ?></div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:.85rem;">
                         <i class="bi bi-wifi-off" style="font-size:2rem;display:block;margin-bottom:8px"></i>
-                        API indisponible — réessayez plus tard.
+                        API indisponible &mdash; r&eacute;essayez plus tard.
                     </div>
                 <?php endif; ?>
-
             </div>
         </aside>
 
+        <!-- ZONE DE LECTURE -->
         <main class="zone-lecture" id="zoneLecture">
 
+            <!-- Header sourate active -->
             <div class="sourate-header-card" id="sourateHeader" data-aos="fade-up">
                 <div>
                     <div class="nom-arabe"><?= htmlspecialchars($sourateMeta['name'] ?? '') ?></div>
-                    <div class="nom-latin" style="margin-top:4px">
+                    <div class="nom-latin">
                         <?= htmlspecialchars($sourateMeta['englishName'] ?? '') ?>
-                        <span class="badge-type" style="margin-left:8px">
+                        <span class="badge-type">
                             <?= ($sourateMeta['revelationType'] ?? '') === 'Meccan'
                                 ? htmlspecialchars($t['mecquoise'])
                                 : htmlspecialchars($t['medinoise']) ?>
@@ -544,35 +565,45 @@
                 </div>
             </div>
 
+            <!-- Bismillah (sauf At-Tawbah = sourate 9) -->
             <?php if ($sourate !== 9): ?>
-                <div class="bismillah-card"><?= $t['bismillah'] ?></div>
+                <div class="bismillah-card"><?= htmlspecialchars($t['bismillah']) ?></div>
             <?php endif; ?>
 
+            <!-- Versets -->
             <div id="versetsContainer">
                 <?php if (!empty($versets)): ?>
-                    <?php foreach ($versets as $v): ?>
-                        <div class="verset-card" data-verset="<?= (int)$v['number'] ?>">
+                    <?php foreach ($versets as $v):
+                        $vNum   = (int)($v['number'] ?? 0);
+                        $texteAr = $v['texteAr'] ?? '';
+                        $texteFr = $v['texteFr'] ?? '';
+                        $audioUrl = $v['audio'] ?? '';
+                    ?>
+                        <div class="verset-card" data-verset="<?= $vNum ?>">
                             <div class="verset-header">
-                                <div class="verset-badge"><?= (int)$v['number'] ?></div>
+                                <div class="verset-badge"><?= $vNum ?></div>
                                 <div class="verset-actions">
-                                    <button class="btn-verset" title="Écouter" onclick="jouerAudio(<?= (int)$v['number'] ?>, '<?= htmlspecialchars($v['audio']) ?>')">
+                                    <button class="btn-verset" title="Ecouter"
+                                        data-audio="<?= htmlspecialchars($audioUrl) ?>"
+                                        onclick="jouerAudio(<?= $vNum ?>, this.dataset.audio)">
                                         <i class="bi bi-volume-up"></i>
                                     </button>
-                                    <button class="btn-verset" title="Copier" onclick="copierVerset('<?= htmlspecialchars(addslashes($v['texteAr'])) ?>')">
+                                    <button class="btn-verset" title="Copier"
+                                        onclick="copierVerset(this)">
                                         <i class="bi bi-clipboard"></i>
                                     </button>
                                 </div>
                             </div>
-                            <div class="texte-arabe"><?= htmlspecialchars($v['texteAr']) ?></div>
-                            <?php if (!empty($v['texteFr'])): ?>
-                                <div class="texte-fr"><?= htmlspecialchars($v['texteFr']) ?></div>
+                            <div class="texte-arabe"><?= htmlspecialchars($texteAr) ?></div>
+                            <?php if ($texteFr !== ''): ?>
+                                <div class="texte-fr"><?= htmlspecialchars($texteFr) ?></div>
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div class="loading-versets">
                         <div class="spinner-coran"></div>
-                        <p>Chargement des versets…</p>
+                        <p>Chargement des versets&hellip;</p>
                     </div>
                 <?php endif; ?>
             </div>
@@ -580,15 +611,16 @@
         </main>
     </div>
 
+    <!-- BARRE AUDIO FIXE -->
     <div class="audio-bar" id="audioBar">
-        <span class="audio-info" id="audioInfo">Verset —</span>
+        <span class="audio-info" id="audioInfo"></span>
         <audio id="audioPlayer" controls></audio>
         <button class="btn-close-audio" onclick="fermerAudio()" title="Fermer">
             <i class="bi bi-x-circle"></i>
         </button>
     </div>
 
-    <?php require_once '../view/sections/vitrine/footer.php'; ?>
+    <?php require_once 'view/sections/vitrine/footer.php'; ?>
 
     <script src="public/templates/templateVitrine/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="public/templates/templateVitrine/assets/vendor/aos/aos.js"></script>
@@ -598,115 +630,146 @@
             once: true
         });
 
-        let sourateActive = <?= $sourate ?>;
+        // Numéro de sourate courante (initialisé depuis PHP)
+        var sourateActive = <?= (int)$sourate ?>;
 
+        // Textes traduits passés depuis PHP (évite les quotes imbriquées)
+        var LANG = {
+            mecquoise: <?= json_encode($t['mecquoise']) ?>,
+            medinoise: <?= json_encode($t['medinoise']) ?>,
+            versets: <?= json_encode($t['versets'])   ?>,
+            sourates: <?= json_encode($t['sourates'])  ?>
+        };
+
+        /* ──────────────────────────────────────────────────────────────
+           CHARGER UNE SOURATE VIA AJAX
+        ────────────────────────────────────────────────────────────── */
         function chargerSourate(num) {
             if (num === sourateActive) return;
             sourateActive = num;
 
-            document.querySelectorAll('.sourate-item').forEach(el => {
+            // Activer l'élément dans la sidebar
+            document.querySelectorAll('.sourate-item').forEach(function(el) {
                 el.classList.toggle('active', parseInt(el.dataset.num) === num);
             });
 
-            document.getElementById('versetsContainer').innerHTML = `
-    <div class="loading-versets">
-      <div class="spinner-coran"></div>
-      <p>Chargement…</p>
-    </div>`;
+            // Spinner
+            document.getElementById('versetsContainer').innerHTML =
+                '<div class="loading-versets"><div class="spinner-coran"></div><p>Chargement&hellip;</p></div>';
 
+            // Fermer sidebar mobile
             document.getElementById('sidebarSourates').classList.remove('open');
 
+            // Appel AJAX
             fetch('?action=coranAjax&sourate=' + num)
-                .then(r => r.json())
-                .then(data => {
-                    if (!data.success) return;
+                .then(function(r) {
+                    return r.json();
+                })
+                .then(function(data) {
+                    if (!data.success) {
+                        document.getElementById('versetsContainer').innerHTML =
+                            '<p style="text-align:center;padding:40px;color:#dc2626">Erreur serveur.</p>';
+                        return;
+                    }
 
-                    const m = data.meta;
-                    document.getElementById('sourateHeader').innerHTML = `
-        <div>
-          <div class="nom-arabe">${m.name || ''}</div>
-          <div class="nom-latin" style="margin-top:4px">
-            ${m.englishName || ''}
-            <span class="badge-type" style="margin-left:8px">
-              ${m.revelationType === 'Meccan' ? '<?= htmlspecialchars(addslashes($t['mecquoise'])) ?>' : '<?= htmlspecialchars(addslashes($t['medinoise'])) ?>'}
-            </span>
-          </div>
-        </div>
-        <div class="sourate-stats">
-          <div class="stat-item">
-            <div class="stat-val">${m.numberOfAyahs || 0}</div>
-            <div class="stat-lab"><?= htmlspecialchars(addslashes($t['versets'])) ?></div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-val">${num}</div>
-            <div class="stat-lab"><?= htmlspecialchars(addslashes($t['sourates'])) ?></div>
-          </div>
-        </div>`;
+                    // Mettre à jour l'en-tête sourate
+                    var m = data.meta || {};
+                    var typeLabel = (m.revelationType === 'Meccan') ? LANG.mecquoise : LANG.medinoise;
+                    document.getElementById('sourateHeader').innerHTML =
+                        '<div>' +
+                        '<div class="nom-arabe">' + (m.name || '') + '</div>' +
+                        '<div class="nom-latin">' + (m.englishName || '') +
+                        '<span class="badge-type">' + typeLabel + '</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="sourate-stats">' +
+                        '<div class="stat-item">' +
+                        '<div class="stat-val">' + (m.numberOfAyahs || 0) + '</div>' +
+                        '<div class="stat-lab">' + LANG.versets + '</div>' +
+                        '</div>' +
+                        '<div class="stat-item">' +
+                        '<div class="stat-val">' + num + '</div>' +
+                        '<div class="stat-lab">' + LANG.sourates + '</div>' +
+                        '</div>' +
+                        '</div>';
 
-                    let html = '';
-                    data.versets.forEach(v => {
-                        const audioUrl = v.audio || '';
-                        const arEsc = v.texteAr.replace(/'/g, "\\'");
-                        html += `
-          <div class="verset-card" data-verset="${v.number}">
-            <div class="verset-header">
-              <div class="verset-badge">${v.number}</div>
-              <div class="verset-actions">
-                <button class="btn-verset" title="Écouter" onclick="jouerAudio(${v.number}, '${audioUrl}')">
-                  <i class="bi bi-volume-up"></i>
-                </button>
-                <button class="btn-verset" title="Copier" onclick="copierVerset('${arEsc}')">
-                  <i class="bi bi-clipboard"></i>
-                </button>
-              </div>
-            </div>
-            <div class="texte-arabe">${v.texteAr}</div>
-            ${v.texteFr ? `<div class="texte-fr">${v.texteFr}</div>` : ''}
-          </div>`;
+                    // Rendu des versets
+                    var html = '';
+                    (data.versets || []).forEach(function(v) {
+                        var audioUrl = (v.audio || '').replace(/'/g, '%27');
+                        html +=
+                            '<div class="verset-card" data-verset="' + v.number + '">' +
+                            '<div class="verset-header">' +
+                            '<div class="verset-badge">' + v.number + '</div>' +
+                            '<div class="verset-actions">' +
+                            '<button class="btn-verset" title="Ecouter" ' +
+                            'onclick="jouerAudio(' + v.number + ', \'' + audioUrl + '\')">' +
+                            '<i class="bi bi-volume-up"></i></button>' +
+                            '<button class="btn-verset" title="Copier" onclick="copierVerset(this)">' +
+                            '<i class="bi bi-clipboard"></i></button>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="texte-arabe">' + escHtml(v.texteAr || '') + '</div>' +
+                            (v.texteFr ? '<div class="texte-fr">' + escHtml(v.texteFr) + '</div>' : '') +
+                            '</div>';
                     });
 
-                    document.getElementById('versetsContainer').innerHTML = html || '<p style="text-align:center;padding:40px;color:var(--text-muted)">Aucun verset trouvé.</p>';
+                    document.getElementById('versetsContainer').innerHTML =
+                        html || '<p style="text-align:center;padding:40px;color:var(--text-muted)">Aucun verset trouv&eacute;.</p>';
+
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
                 })
-                .catch(() => {
+                .catch(function() {
                     document.getElementById('versetsContainer').innerHTML =
-                        '<p style="text-align:center;padding:40px;color:#dc2626">Erreur de chargement — vérifiez votre connexion.</p>';
+                        '<p style="text-align:center;padding:40px;color:#dc2626">Erreur de chargement &mdash; v&eacute;rifiez votre connexion.</p>';
                 });
         }
 
+        /* ──────────────────────────────────────────────────────────────
+           FILTRER LA LISTE DES SOURATES
+        ────────────────────────────────────────────────────────────── */
         function filtrerSourates(q) {
-            const q2 = q.toLowerCase().trim();
-            document.querySelectorAll('.sourate-item').forEach(el => {
-                const nom = el.dataset.nom || '';
-                const num = el.dataset.num || '';
+            var q2 = q.toLowerCase().trim();
+            document.querySelectorAll('.sourate-item').forEach(function(el) {
+                var nom = el.dataset.nom || '';
+                var num = el.dataset.num || '';
                 el.style.display = (!q2 || nom.includes(q2) || num.includes(q2)) ? '' : 'none';
             });
         }
 
+        /* ──────────────────────────────────────────────────────────────
+           LECTEUR AUDIO
+        ────────────────────────────────────────────────────────────── */
         function jouerAudio(num, url) {
-            const bar = document.getElementById('audioBar');
-            const player = document.getElementById('audioPlayer');
-            const info = document.getElementById('audioInfo');
+            var bar = document.getElementById('audioBar');
+            var player = document.getElementById('audioPlayer');
+            var info = document.getElementById('audioInfo');
+            player.pause();
             player.src = url;
-            info.textContent = `Verset ${num} — S.${sourateActive}`;
+            info.textContent = 'Verset ' + num + ' \u2014 S.' + sourateActive;
             bar.classList.add('visible');
-            player.play();
+            player.play().catch(function() {});
         }
 
         function fermerAudio() {
-            const player = document.getElementById('audioPlayer');
-            player.pause();
+            document.getElementById('audioPlayer').pause();
             document.getElementById('audioBar').classList.remove('visible');
         }
 
-        function copierVerset(texte) {
-            navigator.clipboard.writeText(texte).then(() => {
-                const t = document.createElement('div');
-                t.textContent = 'Copié ✓';
-                Object.assign(t.style, {
+        /* ──────────────────────────────────────────────────────────────
+           COPIER UN VERSET (lit le texte depuis le DOM)
+        ────────────────────────────────────────────────────────────── */
+        function copierVerset(btn) {
+            var card = btn.closest('.verset-card');
+            var texte = card ? (card.querySelector('.texte-arabe') || {}).textContent || '' : '';
+            if (!texte) return;
+            navigator.clipboard.writeText(texte.trim()).then(function() {
+                var toast = document.createElement('div');
+                toast.textContent = 'Copi\u00e9 \u2713';
+                Object.assign(toast.style, {
                     position: 'fixed',
                     bottom: '70px',
                     right: '24px',
@@ -716,15 +779,30 @@
                     borderRadius: '8px',
                     fontSize: '.83rem',
                     zIndex: '9999',
-                    boxShadow: '0 4px 14px rgba(113,197,93,.3)'
+                    boxShadow: '0 4px 14px rgba(113,197,93,.3)',
+                    fontFamily: 'Poppins,sans-serif'
                 });
-                document.body.appendChild(t);
-                setTimeout(() => t.remove(), 1800);
+                document.body.appendChild(toast);
+                setTimeout(function() {
+                    toast.remove();
+                }, 1800);
             });
         }
 
+        /* ──────────────────────────────────────────────────────────────
+           SIDEBAR MOBILE
+        ────────────────────────────────────────────────────────────── */
         function toggleSidebar() {
             document.getElementById('sidebarSourates').classList.toggle('open');
+        }
+
+        /* ──────────────────────────────────────────────────────────────
+           UTILITAIRE — échapper le HTML
+        ────────────────────────────────────────────────────────────── */
+        function escHtml(str) {
+            var d = document.createElement('div');
+            d.appendChild(document.createTextNode(str));
+            return d.innerHTML;
         }
     </script>
 </body>
