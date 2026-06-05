@@ -12,30 +12,19 @@ class UserController
         $this->pdo = $db->getConnexion();
     }
 
-    // =========================================
-    // UTILITAIRE : l'utilisateur est-il connecté ?
-    // N'est JAMAIS bloquant — sert uniquement à
-    // activer les fonctionnalités d'historique.
-    // =========================================
 
     public function isLoggedIn(): bool
     {
         return !empty($_SESSION['user_id']);
     }
 
-    // =========================================
-    // UTILITAIRE : ID de l'utilisateur courant
-    // Retourne null si non connecté
-    // =========================================
+
 
     public function getUserId(): ?int
     {
         return $_SESSION['user_id'] ?? null;
     }
 
-    // =========================================
-    // CONNEXION
-    // =========================================
 
     public function login(string $email, string $password): array
     {
@@ -64,19 +53,16 @@ class UserController
             $_SESSION['actif']     = true;
 
             return ['success' => true];
-
         } catch (PDOException $e) {
             return ['success' => false, 'erreur' => 'Erreur de base de données.'];
         }
     }
 
-    // =========================================
-    // INSCRIPTION
-    // =========================================
+
 
     public function register(string $nom, string $email, string $password): array
     {
-        try {
+        try {   
             // Vérifier si l'email existe déjà
             $stmt = $this->pdo->prepare(
                 "SELECT id FROM users WHERE email = :email LIMIT 1"
@@ -98,19 +84,16 @@ class UserController
                 ':nom'      => $nom,
                 ':email'    => $email,
                 ':password' => $hash,
+                
             ]);
 
             return ['success' => true];
-
         } catch (PDOException $e) {
             return ['success' => false, 'erreur' => 'Erreur lors de la création du compte.'];
         }
     }
 
-    // =========================================
-    // MIDDLEWARE ADMIN — UNIQUEMENT pour admin.php
-    // Redirige vers login si non connecté ou non admin
-    // =========================================
+
 
     public function requireAdmin(): void
     {
@@ -126,9 +109,7 @@ class UserController
         }
     }
 
-    // =========================================
-    // INIT TABLE USERS (si elle n'existe pas encore)
-    // =========================================
+
 
     public function initTable(): void
     {

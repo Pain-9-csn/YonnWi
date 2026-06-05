@@ -490,7 +490,7 @@
             <?php
             $events = [
     [
-        'title' => $lang=='ar' ? 'بداية رمضان' : ($lang=='en' ? 'Beginning of Ramadan' : ($lang=='wo' ? 'Tambali Ramadan' : 'Début du Ramadan')),
+        'title' => $lang=='ar' ? 'بداية رمضان' : ($lang=='en' ? 'Beginning of Ramadan' : ($lang=='wo' ? 'Tambali Weeru Koor' : 'Début du Ramadan')),
         'date_hijri' => '1 Ramadan 1447',
         'date_fr' => '18 Février 2026',
         'icon' => 'moon-stars-fill'
