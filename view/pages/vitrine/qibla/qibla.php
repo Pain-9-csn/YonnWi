@@ -1,577 +1,457 @@
 <!DOCTYPE html>
-<html lang="fr" dir="<?= $textes['dir'] ?>">
-
+<html lang="<?= htmlspecialchars($traduction['dir'] === 'rtl' ? 'ar' : 'fr') ?>" dir="<?= $traduction['dir'] ?>">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= htmlspecialchars($textes['titre']) ?> — YonnWi</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><?= htmlspecialchars($textes['titre']) ?> — YoonWi</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="../../../../public/templates/templateVitrine/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../../../public/templates/templateVitrine/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../public/templates/templateVitrine/assets/css/main.css" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --green: #2d7a4f;
+  --green-light: #3da066;
+  --bg-dark: #0d1117;
+  --bg-card: #161b22;
+  --bg-card2: #1c2330;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --border: rgba(201,168,76,0.2);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg-dark);
+  color:var(--text);
+  min-height:100vh;
+}
+.page-wrapper { padding-top:80px; min-height:100vh; }
 
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+/* Hero banner */
+.qibla-hero {
+  background: linear-gradient(135deg, #0d1117 0%, #1a2332 50%, #0d1117 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 0 2rem;
+  text-align:center;
+}
+.qibla-hero .bismillah {
+  font-family:'Amiri',serif;
+  font-size:1.5rem;
+  color:var(--gold-light);
+  margin-bottom:0.3rem;
+  direction:rtl;
+}
+.qibla-hero .verset-ref {
+  font-size:0.8rem;
+  color:var(--text-muted);
+  margin-bottom:1.5rem;
+}
+.qibla-hero h1 {
+  font-size:2.5rem;
+  font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:0.5rem;
+}
+.qibla-hero p {
+  color:var(--text-muted);
+  font-size:1rem;
+}
 
-  <link href="public/templates/templateVitrine/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="public/templates/templateVitrine/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="public/templates/templateVitrine/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="public/templates/templateVitrine/assets/css/main.css" rel="stylesheet">
+/* Main layout */
+.qibla-main {
+  max-width:900px;
+  margin:0 auto;
+  padding:2.5rem 1rem 4rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  align-items:start;
+}
+@media(max-width:700px){ .qibla-main{ grid-template-columns:1fr; } }
 
-  <style>
-    :root {
-      --accent:       #71c55d;
-      --accent-dark:  #5fb04d;
-      --accent-light: color-mix(in srgb, var(--accent), white 88%);
-      --accent-mid:   color-mix(in srgb, var(--accent), white 70%);
-      --accent-bord:  color-mix(in srgb, var(--accent), transparent 72%);
-      --text-main:    #1f2937;
-      --text-muted:   #6b7280;
-      --bg-page:      #f7faf7;
-      --bg-card:      #ffffff;
-      --shadow-sm:    0 2px 14px rgba(113,197,93,.10);
-      --shadow-md:    0 8px 32px rgba(113,197,93,.16);
-      --radius-lg:    20px;
-      --radius-md:    12px;
-    }
+/* Compass */
+.compass-card {
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.5rem;
+}
+.compass-wrap {
+  position:relative;
+  width:240px;
+  height:240px;
+}
+.compass-ring {
+  width:240px;
+  height:240px;
+  border-radius:50%;
+  background: conic-gradient(from 0deg, #1c2330, #2a3342, #1c2330);
+  border:2px solid var(--border);
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 0 30px rgba(201,168,76,0.08), inset 0 0 20px rgba(0,0,0,0.4);
+  transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+.compass-ring::before {
+  content:'';
+  position:absolute;
+  inset:8px;
+  border-radius:50%;
+  border:1px solid rgba(201,168,76,0.15);
+}
+/* Cardinal points */
+.cardinal {
+  position:absolute;
+  font-size:0.75rem;
+  font-weight:600;
+  color:var(--text-muted);
+  letter-spacing:0.05em;
+}
+.cardinal.n { top:12px; left:50%; transform:translateX(-50%); color:var(--gold); }
+.cardinal.s { bottom:12px; left:50%; transform:translateX(-50%); }
+.cardinal.e { right:12px; top:50%; transform:translateY(-50%); }
+.cardinal.w { left:12px; top:50%; transform:translateY(-50%); }
 
-    body { background: var(--bg-page); font-family: 'Poppins', sans-serif; color: var(--text-main); }
+/* Kaaba arrow */
+.kaaba-arrow {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) rotate(0deg);
+  transition:transform 1s cubic-bezier(0.34,1.56,0.64,1);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:8px;
+}
+.arrow-body {
+  width:4px;
+  height:70px;
+  background:linear-gradient(to top,var(--gold),var(--gold-light));
+  border-radius:4px 4px 0 0;
+  margin-bottom:-1px;
+}
+.arrow-head {
+  width:0;
+  height:0;
+  border-left:10px solid transparent;
+  border-right:10px solid transparent;
+  border-bottom:18px solid var(--gold-light);
+}
+.arrow-tail {
+  width:4px;
+  height:40px;
+  background:rgba(201,168,76,0.3);
+  border-radius:0 0 4px 4px;
+}
+/* Center dot */
+.center-dot {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 10px var(--gold);
+  z-index:2;
+}
 
-    /* ── HERO ── */
-    .qibla-hero {
-      background: linear-gradient(135deg,
-        color-mix(in srgb, var(--accent), white 80%) 0%,
-        color-mix(in srgb, var(--accent), white 92%) 100%);
-      border-bottom: 1px solid var(--accent-bord);
-      padding: 60px 0 44px;
-      text-align: center;
-    }
-    .qibla-hero h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-    .qibla-hero p { color: var(--text-muted); font-size: .95rem; margin-bottom: 0; }
-    .qibla-hero .verset-arabe {
-      font-family: 'Amiri', serif;
-      font-size: 1.3rem;
-      color: var(--accent-dark);
-      margin-top: 12px;
-      line-height: 1.8;
-    }
-    .qibla-hero .verset-ref {
-      font-size: .75rem;
-      color: var(--text-muted);
-    }
+/* Kaaba icon in center */
+.compass-kaaba-icon {
+  position:absolute;
+  width:34px;
+  height:34px;
+  background:var(--bg-dark);
+  border:2px solid var(--gold);
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.1rem;
+  z-index:3;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 12px rgba(201,168,76,0.3);
+}
 
-    /* ── LAYOUT ── */
-    .qibla-wrap {
-      max-width: 1000px;
-      margin: 40px auto 80px;
-      padding: 0 20px;
-    }
+/* Stats row */
+.compass-stats {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+  width:100%;
+}
+.stat-chip {
+  background:var(--bg-card2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:0.9rem 1rem;
+  text-align:center;
+}
+.stat-chip .label { font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; }
+.stat-chip .value { font-size:1.4rem; font-weight:700; color:var(--gold-light); }
+.stat-chip .unit  { font-size:0.75rem; color:var(--text-muted); }
 
-    /* ── GRILLE PRINCIPALE ── */
-    .qibla-grid {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 28px;
-      align-items: start;
-    }
-    @media (max-width: 860px) {
-      .qibla-grid { grid-template-columns: 1fr; }
-    }
+/* Right panel */
+.info-card {
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:1.8rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+}
+.locate-btn {
+  width:100%;
+  padding:0.9rem;
+  background:linear-gradient(135deg,var(--green),var(--green-light));
+  border:none;
+  border-radius:14px;
+  color:#fff;
+  font-family:'Outfit',sans-serif;
+  font-size:1rem;
+  font-weight:600;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.6rem;
+  transition:all 0.25s;
+  box-shadow:0 4px 16px rgba(45,122,79,0.3);
+}
+.locate-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(45,122,79,0.4); }
+.locate-btn:disabled { opacity:0.6; cursor:wait; }
 
-    /* ── BOUSSOLE ── */
-    .compass-card {
-      background: var(--bg-card);
-      border: 1px solid var(--accent-bord);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      padding: 36px 24px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-    }
+.status-box {
+  padding:1rem;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--bg-card2);
+  font-size:0.85rem;
+  color:var(--text-muted);
+  text-align:center;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.5rem;
+}
+.status-box.success { border-color:rgba(61,160,102,0.4); color:#3da066; background:rgba(45,122,79,0.1); }
+.status-box.error   { border-color:rgba(240,80,80,0.4);  color:#f05050; background:rgba(240,80,80,0.08); }
 
-    .compass-wrap {
-      position: relative;
-      width: 280px;
-      height: 280px;
-    }
+.coords-block { font-size:0.8rem; color:var(--text-muted); }
+.coords-block span { color:var(--text); font-weight:500; }
 
-    /* Cadran SVG */
-    .compass-svg { width: 280px; height: 280px; }
+.tips-title { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.07em; color:var(--text-muted); }
+.tips-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.6rem; }
+.tips-list li {
+  display:flex;
+  align-items:flex-start;
+  gap:0.6rem;
+  font-size:0.82rem;
+  color:var(--text-muted);
+  padding:0.55rem 0.75rem;
+  background:var(--bg-card2);
+  border-radius:10px;
+  border-left:2px solid var(--gold);
+}
+.tips-list li i { color:var(--gold); flex-shrink:0; margin-top:2px; }
 
-    /* Aiguille qibla */
-    #qiblaArrow {
-      transform-origin: 140px 140px;
-      transition: transform 1.2s cubic-bezier(.34,1.56,.64,1);
-    }
+/* Spinner */
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin { animation:spin 1s linear infinite; display:inline-block; }
 
-    /* Bouton localiser */
-    .btn-localiser {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      font-size: .95rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(113,197,93,.30);
-      transition: transform .25s, box-shadow .25s;
-      font-family: 'Poppins', sans-serif;
-    }
-    .btn-localiser:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(113,197,93,.38);
-    }
-    .btn-localiser:active { transform: scale(.97); }
-    .btn-localiser:disabled {
-      opacity: .65;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Pulse autour de la boussole pendant la localisation */
-    .compass-wrap.locating::before {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      animation: pulse-ring 1.2s ease-out infinite;
-    }
-    @keyframes pulse-ring {
-      0%   { opacity: .8; transform: scale(1); }
-      100% { opacity: 0;  transform: scale(1.12); }
-    }
-
-    /* Indicateur de degré central */
-    .degree-badge {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--accent);
-      color: #fff;
-      border-radius: 50%;
-      width: 64px;
-      height: 64px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: .85rem;
-      box-shadow: 0 4px 16px rgba(113,197,93,.4);
-      line-height: 1.1;
-      transition: background .3s;
-    }
-    .degree-badge.ready { background: var(--accent); }
-    .degree-badge span { font-size: .65rem; font-weight: 400; opacity: .85; }
-
-    /* ── INFOS PANEL ── */
-    .infos-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .info-card {
-      background: var(--bg-card);
-      border: 1px solid var(--accent-bord);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
-      padding: 20px 22px;
-    }
-    .info-card h5 {
-      font-size: .78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-    .info-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--accent-bord);
-    }
-    .info-row:last-child { border-bottom: none; }
-    .info-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent-dark);
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .info-label { font-size: .8rem; color: var(--text-muted); }
-    .info-val   { font-size: 1.05rem; font-weight: 600; color: var(--text-main); }
-
-    /* Stat distance + direction */
-    .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .stat-box {
-      background: var(--accent-light);
-      border: 1px solid var(--accent-bord);
-      border-radius: var(--radius-md);
-      padding: 18px 14px;
-      text-align: center;
-    }
-    .stat-box .val {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--accent-dark);
-      line-height: 1;
-    }
-    .stat-box .lab {
-      font-size: .72rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* Message d'état */
-    .etat-msg {
-      border-radius: var(--radius-md);
-      padding: 14px 18px;
-      font-size: .88rem;
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-    .etat-msg.info    { background: var(--accent-light); color: var(--accent-dark); border: 1px solid var(--accent-bord); display: flex; }
-    .etat-msg.erreur  { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; display: flex; }
-    .etat-msg.succes  { background: var(--accent-light); color: var(--accent-dark); border: 1px solid var(--accent-bord); display: flex; }
-
-    /* Spinner inline */
-    .spin-sm {
-      width: 16px; height: 16px;
-      border: 2px solid var(--accent-mid);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin .7s linear infinite;
-      flex-shrink: 0;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Carte conseils */
-    .conseils-card {
-      background: var(--bg-card);
-      border: 1px solid var(--accent-bord);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
-      padding: 20px 22px;
-    }
-    .conseils-card h5 {
-      font-size: .78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-    .conseil-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 8px 0;
-      font-size: .84rem;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--accent-bord);
-    }
-    .conseil-item:last-child { border-bottom: none; }
-    .conseil-item i { color: var(--accent); margin-top: 2px; flex-shrink: 0; }
-  </style>
+/* Pulse animation for active state */
+@keyframes pulse-gold {
+  0%,100% { box-shadow:0 0 20px rgba(201,168,76,0.1); }
+  50%      { box-shadow:0 0 40px rgba(201,168,76,0.3); }
+}
+.compass-active .compass-ring { animation:pulse-gold 2s ease-in-out infinite; }
+</style>
 </head>
+<body>
+<div class="page-wrapper">
 
-<body class="index-page">
+<?php if (file_exists(__DIR__ . '/../../../../view/sections/vitrine/menu.php')) {
+    require_once __DIR__ . '/../../../../view/sections/vitrine/menu.php';
+} ?>
 
-<?php require_once 'view/sections/vitrine/menu.php'; ?>
-
-<!-- HERO -->
-<section class="qibla-hero" data-aos="fade-down">
-  <div class="container">
-    <h1><?= htmlspecialchars($textes['titre']) ?></h1>
-    <p><?= htmlspecialchars($textes['sous_titre']) ?></p>
-    <div class="verset-arabe"><?= htmlspecialchars($textes['bismillah']) ?></div>
-    <div class="verset-ref"><?= htmlspecialchars($textes['verset_ref']) ?></div>
-  </div>
+<!-- Hero -->
+<section class="qibla-hero">
+  <div class="bismillah"><?= htmlspecialchars($textes['bismillah']) ?></div>
+  <div class="verset-ref"><?= htmlspecialchars($textes['verset_ref']) ?></div>
+  <h1><?= htmlspecialchars($textes['titre']) ?></h1>
+  <p><?= htmlspecialchars($textes['sous_titre']) ?></p>
 </section>
 
-<!-- CONTENU PRINCIPAL -->
-<div class="qibla-wrap">
-  <div class="qibla-grid">
+<!-- Main -->
+<div class="qibla-main">
 
-    <!-- ── BOUSSOLE ── -->
-    <div class="compass-card" data-aos="fade-up">
-
-      <!-- SVG Boussole -->
-      <div class="compass-wrap" id="compassWrap">
-
-        <svg class="compass-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
-
-          <!-- Cercle extérieur cadran -->
-          <circle cx="140" cy="140" r="130" fill="none" stroke="#e5e7eb" stroke-width="1"/>
-          <circle cx="140" cy="140" r="128" fill="color-mix(in srgb, #71c55d, white 94%)" stroke="color-mix(in srgb, #71c55d, transparent 70%)" stroke-width="1"/>
-
-          <!-- Graduations tous les 30° -->
-          <?php for ($deg = 0; $deg < 360; $deg += 10): ?>
-            <?php
-              $rad = deg2rad($deg - 90);
-              $major = ($deg % 30 === 0);
-              $r1 = $major ? 115 : 120;
-              $r2 = 128;
-              $x1 = 140 + $r1 * cos($rad);
-              $y1 = 140 + $r1 * sin($rad);
-              $x2 = 140 + $r2 * cos($rad);
-              $y2 = 140 + $r2 * sin($rad);
-              $sw = $major ? '2' : '1';
-              $col = $major ? '#5fb04d' : '#9ca3af';
-            ?>
-            <line x1="<?= round($x1,1) ?>" y1="<?= round($y1,1) ?>" x2="<?= round($x2,1) ?>" y2="<?= round($y2,1) ?>" stroke="<?= $col ?>" stroke-width="<?= $sw ?>"/>
-          <?php endfor; ?>
-
-          <!-- Points cardinaux -->
-          <text x="140" y="22"  text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="700" fill="#71c55d"><?= $textes['nord'] ?></text>
-          <text x="258" y="145" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#9ca3af">E</text>
-          <text x="22"  y="145" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#9ca3af">W</text>
-          <text x="140" y="262" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#9ca3af">S</text>
-
-          <!-- Cercle intérieur décoratif -->
-          <circle cx="140" cy="140" r="105" fill="none" stroke="color-mix(in srgb, #71c55d, transparent 80%)" stroke-width="1" stroke-dasharray="4 4"/>
-
-          <!-- Aiguille Qibla (pointe verte = Mecque) -->
-          <g id="qiblaArrow">
-            <!-- Corps de l'aiguille -->
-            <line x1="140" y1="50" x2="140" y2="145" stroke="#71c55d" stroke-width="4" stroke-linecap="round"/>
-            <!-- Pointe triangulaire -->
-            <polygon points="140,36 133,60 147,60" fill="#71c55d"/>
-            <!-- Côté opposé (gris) -->
-            <line x1="140" y1="145" x2="140" y2="210" stroke="#d1d5db" stroke-width="3" stroke-linecap="round"/>
-            <polygon points="140,222 134,200 146,200" fill="#d1d5db"/>
-            <!-- Icône Kaaba en haut de l'aiguille -->
-            <rect x="135" y="22" width="10" height="10" rx="1" fill="#fff" stroke="#71c55d" stroke-width="1.5"/>
-          </g>
-
-          <!-- Centre pivot -->
-          <circle cx="140" cy="140" r="8" fill="white" stroke="#71c55d" stroke-width="2.5"/>
-          <circle cx="140" cy="140" r="3" fill="#71c55d"/>
-
-        </svg>
-
-        <!-- Badge degré central -->
-        <div class="degree-badge" id="degreeBadge">
-          <div id="degreeVal">—</div>
-          <span><?= $textes['degres'] ?></span>
+  <!-- Compass -->
+  <div class="compass-card" id="compassCard">
+    <div class="compass-wrap">
+      <div class="compass-ring" id="compassRing">
+        <span class="cardinal n"><?= $textes['nord'] ?></span>
+        <span class="cardinal s">S</span>
+        <span class="cardinal e">E</span>
+        <span class="cardinal w">O</span>
+        <div class="kaaba-arrow" id="qiblaArrow">
+          <div class="arrow-head"></div>
+          <div class="arrow-body"></div>
+          <div class="arrow-tail"></div>
         </div>
+        <div class="kaaba-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:28px;height:28px;background:var(--bg-dark);border:2px solid var(--gold);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:1rem;z-index:3;box-shadow:0 0 10px rgba(201,168,76,0.3);">🕋</div>
       </div>
-
-      <!-- Bouton -->
-      <button class="btn-localiser" id="btnLocaliser" onclick="localiser()">
-        <i class="bi bi-geo-alt-fill"></i>
-        <?= htmlspecialchars($textes['localiser']) ?>
-      </button>
-
-      <!-- Message d'état -->
-      <div class="etat-msg" id="etatMsg">
-        <div class="spin-sm" id="etatSpinner" style="display:none"></div>
-        <i class="bi bi-info-circle" id="etatIcon"></i>
-        <span id="etatTexte"></span>
-      </div>
-
     </div>
 
-    <!-- ── PANEL INFOS ── -->
-    <div class="infos-panel">
-
-      <!-- Stats distance + direction -->
-      <div class="stat-grid" data-aos="fade-up" data-aos-delay="100">
-        <div class="stat-box">
-          <div class="val" id="distanceVal">—</div>
-          <div class="lab"><?= htmlspecialchars($textes['distance']) ?> (<?= $textes['km'] ?>)</div>
-        </div>
-        <div class="stat-box">
-          <div class="val" id="directionVal">—</div>
-          <div class="lab"><?= htmlspecialchars($textes['direction'] . ' ' . $textes['degres']) ?></div>
-        </div>
+    <div class="compass-stats">
+      <div class="stat-chip">
+        <div class="label"><?= htmlspecialchars($textes['direction']) ?></div>
+        <div class="value" id="statDir">—</div>
+        <div class="unit"><?= $textes['degres'] ?></div>
       </div>
-
-      <!-- Infos position -->
-      <div class="info-card" data-aos="fade-up" data-aos-delay="160">
-        <h5><i class="bi bi-geo me-2" style="color:var(--accent)"></i>Ma position</h5>
-        <div class="info-row">
-          <div class="info-icon"><i class="bi bi-compass"></i></div>
-          <div>
-            <div class="info-label">Latitude</div>
-            <div class="info-val" id="myLat">—</div>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="info-icon"><i class="bi bi-compass"></i></div>
-          <div>
-            <div class="info-label">Longitude</div>
-            <div class="info-val" id="myLng">—</div>
-          </div>
-        </div>
+      <div class="stat-chip">
+        <div class="label"><?= htmlspecialchars($textes['distance']) ?></div>
+        <div class="value" id="statDist">—</div>
+        <div class="unit"><?= $textes['km'] ?></div>
       </div>
-
-      <!-- Infos Mecque -->
-      <div class="info-card" data-aos="fade-up" data-aos-delay="220">
-        <h5><i class="bi bi-building me-2" style="color:var(--accent)"></i><?= htmlspecialchars($textes['mecque']) ?></h5>
-        <div class="info-row">
-          <div class="info-icon"><i class="bi bi-pin-map-fill"></i></div>
-          <div>
-            <div class="info-label">Latitude</div>
-            <div class="info-val"><?= $meccaLat ?></div>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="info-icon"><i class="bi bi-pin-map-fill"></i></div>
-          <div>
-            <div class="info-label">Longitude</div>
-            <div class="info-val"><?= $meccaLng ?></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Conseils -->
-      <div class="conseils-card" data-aos="fade-up" data-aos-delay="300">
-        <h5><i class="bi bi-lightbulb me-2" style="color:var(--accent)"></i>Conseils</h5>
-        <div class="conseil-item">
-          <i class="bi bi-check2-circle"></i>
-          <span>Éloignez-vous des objets métalliques pour éviter les interférences magnétiques.</span>
-        </div>
-        <div class="conseil-item">
-          <i class="bi bi-check2-circle"></i>
-          <span>La pointe verte de la boussole indique la direction de la Kaaba.</span>
-        </div>
-        <div class="conseil-item">
-          <i class="bi bi-check2-circle"></i>
-          <span>Activez le GPS de votre appareil pour une précision optimale.</span>
-        </div>
-        <div class="conseil-item">
-          <i class="bi bi-check2-circle"></i>
-          <span>La direction est calculée selon le grand cercle orthodromique.</span>
-        </div>
-      </div>
-
     </div>
   </div>
-</div>
 
-<?php require_once 'view/sections/vitrine/footer.php'; ?>
+  <!-- Info panel -->
+  <div class="info-card">
+    <button class="locate-btn" id="locateBtn" onclick="localiserQibla()">
+      <i class="bi bi-geo-alt-fill"></i>
+      <span id="locateBtnText"><?= htmlspecialchars($textes['localiser']) ?></span>
+    </button>
 
-<script src="public/templates/templateVitrine/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="public/templates/templateVitrine/assets/vendor/aos/aos.js"></script>
+    <div class="status-box" id="statusBox">
+      <i class="bi bi-info-circle"></i>
+      <?= htmlspecialchars($textes['en_cours']) ?>
+    </div>
+
+    <div class="coords-block" id="coordsBlock" style="display:none">
+      <div>Lat : <span id="dispLat">—</span> &nbsp; Lng : <span id="dispLng">—</span></div>
+    </div>
+
+    <div>
+      <div class="tips-title mb-2">Conseils</div>
+      <ul class="tips-list">
+        <li><i class="bi bi-compass"></i> Tenez l'appareil à plat, à l'horizontale</li>
+        <li><i class="bi bi-telephone"></i> Éloignez-vous des objets métalliques</li>
+        <li><i class="bi bi-arrow-repeat"></i> Recalibrez en dessinant un 8 avec l'appareil</li>
+        <li><i class="bi bi-shield-check"></i> La géolocalisation reste sur votre appareil</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end qibla-main -->
+
+</div><!-- end page-wrapper -->
+
+<?php if (file_exists(__DIR__ . '/../../../../view/sections/vitrine/footer.php')) {
+    require_once __DIR__ . '/../../../../view/sections/vitrine/footer.php';
+} ?>
+
 <script>
-AOS.init({ duration: 600, once: true });
+const AJAX_URL = '../../../../index.php?action=ajax_qibla';
 
-// Coordonnées fixes Mecque
-const MECCA_LAT = <?= $meccaLat ?>;
-const MECCA_LNG = <?= $meccaLng ?>;
+function localiserQibla() {
+  const btn     = document.getElementById('locateBtn');
+  const btnText = document.getElementById('locateBtnText');
+  const status  = document.getElementById('statusBox');
+  const arrow   = document.getElementById('qiblaArrow');
+  const card    = document.getElementById('compassCard');
 
-// ── Calcul trigonométrique côté client (même formule que PHP) ──
-function calculerQibla(lat, lng) {
-  const toRad = x => x * Math.PI / 180;
-  const lat1 = toRad(lat), lng1 = toRad(lng);
-  const lat2 = toRad(MECCA_LAT), lng2 = toRad(MECCA_LNG);
-  const dLng = lng2 - lng1;
-  const y = Math.sin(dLng) * Math.cos(lat2);
-  const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
-  const bearing = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
-  return Math.round(bearing * 10) / 10;
-}
-
-// ── Distance haversine ──
-function calculerDistance(lat, lng) {
-  const R = 6371;
-  const toRad = x => x * Math.PI / 180;
-  const dLat = toRad(MECCA_LAT - lat);
-  const dLng = toRad(MECCA_LNG - lng);
-  const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat)) * Math.cos(toRad(MECCA_LAT)) * Math.sin(dLng/2)**2;
-  return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
-}
-
-// ── Afficher un message d'état ──
-function setEtat(type, texte, spinner = false) {
-  const el  = document.getElementById('etatMsg');
-  const sp  = document.getElementById('etatSpinner');
-  const ico = document.getElementById('etatIcon');
-  const txt = document.getElementById('etatTexte');
-  el.className = 'etat-msg ' + type;
-  sp.style.display  = spinner ? 'block' : 'none';
-  ico.style.display = spinner ? 'none'  : 'block';
-  ico.className = type === 'erreur' ? 'bi bi-exclamation-circle' : 'bi bi-info-circle';
-  txt.textContent = texte;
-}
-
-// ── Localiser ──
-function localiser() {
   if (!navigator.geolocation) {
-    setEtat('erreur', '<?= addslashes($textes['erreur_geo']) ?>');
+    setStatus('error', '<?= addslashes($textes['erreur_geo']) ?>');
     return;
   }
 
-  const btn = document.getElementById('btnLocaliser');
-  const cw  = document.getElementById('compassWrap');
-
   btn.disabled = true;
-  cw.classList.add('locating');
-  setEtat('info', '<?= addslashes($textes['en_cours']) ?>', true);
+  btnText.innerHTML = '<span class="spin"><i class="bi bi-arrow-repeat"></i></span> <?= addslashes($textes['en_cours']) ?>';
+  setStatus('info', '<span class="spin"><i class="bi bi-arrow-repeat"></i></span> Localisation en cours…');
 
   navigator.geolocation.getCurrentPosition(
-    pos => {
+    (pos) => {
       const lat = pos.coords.latitude;
       const lng = pos.coords.longitude;
-      const dir = calculerQibla(lat, lng);
-      const dist = calculerDistance(lat, lng);
 
-      // Mettre à jour la boussole
-      document.getElementById('qiblaArrow').style.transform = `rotate(${dir}deg)`;
-      document.getElementById('degreeVal').textContent = Math.round(dir);
-      document.getElementById('degreeBadge').classList.add('ready');
+      document.getElementById('dispLat').textContent = lat.toFixed(5);
+      document.getElementById('dispLng').textContent = lng.toFixed(5);
+      document.getElementById('coordsBlock').style.display = 'block';
 
-      // Statistiques
-      document.getElementById('distanceVal').textContent = dist.toLocaleString();
-      document.getElementById('directionVal').textContent = Math.round(dir);
-      document.getElementById('myLat').textContent = lat.toFixed(6);
-      document.getElementById('myLng').textContent = lng.toFixed(6);
+      fetch(AJAX_URL, {
+        method : 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body   : `lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}`
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          const deg  = parseFloat(data.direction);
+          const dist = Math.round(data.distance);
 
-      btn.disabled = false;
-      cw.classList.remove('locating');
-      setEtat('succes', `Qibla trouvée : ${Math.round(dir)}° depuis le Nord`);
+          document.getElementById('statDir').textContent  = deg.toFixed(1);
+          document.getElementById('statDist').textContent = dist.toLocaleString();
 
-      // Envoi optionnel en DB
-      fetch('?action=qiblaAjax', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `lat=${lat}&lng=${lng}`
-      }).catch(() => {});
+          arrow.style.transform = `translate(-50%,-50%) rotate(${deg}deg)`;
+          card.classList.add('compass-active');
+
+          setStatus('success', `🕋 Direction : ${deg.toFixed(1)}° — Distance : ${dist.toLocaleString()} km`);
+        } else {
+          setStatus('error', data.erreur || 'Erreur serveur');
+        }
+        btn.disabled = false;
+        btnText.innerHTML = '<i class="bi bi-geo-alt-fill"></i> <?= addslashes($textes['localiser']) ?>';
+      })
+      .catch(() => {
+        setStatus('error', 'Erreur réseau');
+        btn.disabled = false;
+        btnText.innerHTML = '<i class="bi bi-geo-alt-fill"></i> <?= addslashes($textes['localiser']) ?>';
+      });
     },
-    err => {
+    (err) => {
+      const msg = err.code === 1 ? '<?= addslashes($textes['refus_geo']) ?>' : '<?= addslashes($textes['erreur_geo']) ?>';
+      setStatus('error', msg);
       btn.disabled = false;
-      cw.classList.remove('locating');
-      const msg = err.code === 1
-        ? '<?= addslashes($textes['refus_geo']) ?>'
-        : '<?= addslashes($textes['erreur_geo']) ?>';
-      setEtat('erreur', msg);
+      btnText.innerHTML = '<i class="bi bi-geo-alt-fill"></i> <?= addslashes($textes['localiser']) ?>';
     },
-    { enableHighAccuracy: true, timeout: 10000 }
+    { enableHighAccuracy:true, timeout:10000 }
   );
+}
+
+function setStatus(type, msg) {
+  const box = document.getElementById('statusBox');
+  box.className = 'status-box ' + (type === 'info' ? '' : type);
+  box.innerHTML = msg;
+}
+
+/* Optional: device orientation compass */
+if (window.DeviceOrientationEvent) {
+  window.addEventListener('deviceorientation', (e) => {
+    if (!e.alpha) return;
+    const heading  = e.webkitCompassHeading || (360 - e.alpha);
+    const arrow    = document.getElementById('qiblaArrow');
+    const current  = parseFloat(arrow.dataset.qibla || 0);
+    arrow.style.transform = `translate(-50%,-50%) rotate(${current - heading}deg)`;
+  });
 }
 </script>
 </body>
