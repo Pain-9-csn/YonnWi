@@ -201,7 +201,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--tx
 <div class="yw-shell">
 
 <?php
-$menuPath = __DIR__ . '/../../../../view/sections/vitrine/menu.php';
+$menuPath = __DIR__ . '../../../view/sections/vitrine/menu.php';
 if (file_exists($menuPath)) require_once $menuPath;
 ?>
 
@@ -294,7 +294,7 @@ if (file_exists($menuPath)) require_once $menuPath;
 </main>
 
 <?php
-$footerPath = __DIR__ . '/../../../../view/sections/vitrine/footer.php';
+$footerPath = __DIR__ . '../../../view/sections/vitrine/footer.php';
 if (file_exists($footerPath)) require_once $footerPath;
 ?>
 
