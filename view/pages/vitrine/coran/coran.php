@@ -1,394 +1,570 @@
+<?php
+// Variables injectées par CoranController::index()
+$sourateNum    = $sourateNum    ?? 1;
+$listeSourates = $listeSourates ?? [];
+$sourateActive = $sourateActive ?? [];
+$versets       = $versets       ?? [];
+$userId        = $userId        ?? null;
+$progression   = $progression   ?? null;
+$lang          = $lang          ?? 'fr';
+
+// Chemin racine depuis view/pages/vitrine/coran/
+$root = '../../../../';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Coran — YoonWi</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link href="../../../../public/templates/templateVitrine/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../../../public/templates/templateVitrine/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../public/templates/templateVitrine/assets/css/main.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Amiri:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="<?= $root ?>public/templates/templateVitrine/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?= $root ?>public/templates/templateVitrine/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="<?= $root ?>public/templates/templateVitrine/assets/css/main.css" rel="stylesheet">
 <style>
-:root{
-  --emerald:#1a6b50;--emerald-l:#25957a;
-  --gold:#c9a84c;--gold-l:#e8c97a;
-  --bg:#07100e;--card:#0d1f1a;--card2:#122b24;
-  --text:#d8ede8;--muted:#6a9a8a;--border:rgba(26,107,80,0.3);
+:root {
+  --em:  #1a6b50;
+  --eml: #25957a;
+  --gd:  #c9a84c;
+  --gdl: #e8c97a;
+  --bg:  #07100e;
+  --c1:  #0d1f1a;
+  --c2:  #122b24;
+  --txt: #d8ede8;
+  --mt:  #6a9a8a;
+  --br:  rgba(26,107,80,.3);
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
-.page-wrapper{padding-top:80px}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--txt); }
 
-/* Hero */
-.coran-hero{
-  padding:2.5rem 0 2rem;
-  background:linear-gradient(180deg,#0b1f18 0%,var(--bg) 100%);
-  border-bottom:1px solid var(--border);
-  text-align:center;
-}
-.coran-hero .bismillah{
-  font-family:'Scheherazade New',serif;
-  font-size:2rem;color:var(--gold-l);
-  direction:rtl;margin-bottom:0.3rem;
-}
-.coran-hero h1{
-  font-size:2.2rem;font-weight:600;
-  background:linear-gradient(135deg,var(--emerald-l),#8de8c8);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:0.3rem;
-}
-.coran-hero p{color:var(--muted);font-size:0.92rem;}
+/* ---------- page shell ---------- */
+.yw-shell { display: flex; flex-direction: column; min-height: 100vh; padding-top: 70px; }
+.yw-main  { flex: 1; }
 
-/* Layout */
-.coran-layout{
-  max-width:1100px;margin:0 auto;
-  padding:2rem 1rem 4rem;
-  display:grid;
-  grid-template-columns:300px 1fr;
-  gap:1.5rem;
-  align-items:start;
+/* ---------- hero ---------- */
+.hero {
+  text-align: center;
+  padding: 2.5rem 1rem 2rem;
+  background: linear-gradient(180deg,#0b1f18 0%,var(--bg) 100%);
+  border-bottom: 1px solid var(--br);
 }
-@media(max-width:768px){.coran-layout{grid-template-columns:1fr;}}
+.hero .bsm {
+  font-family: 'Scheherazade New', serif;
+  font-size: 1.9rem; color: var(--gdl);
+  display: block; direction: rtl; margin-bottom: .3rem;
+}
+.hero h1 {
+  font-size: 2rem; font-weight: 600;
+  background: linear-gradient(135deg, var(--eml), #8de8c8);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: .25rem;
+}
+.hero p { font-size: .85rem; color: var(--mt); }
 
-/* Sidebar */
-.sourates-panel{
-  background:var(--card);border:1px solid var(--border);border-radius:18px;
-  overflow:hidden;position:sticky;top:90px;max-height:calc(100vh - 110px);
-  display:flex;flex-direction:column;
+/* ---------- layout ---------- */
+.coran-wrap {
+  max-width: 1140px; margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.25rem;
+  align-items: start;
 }
-.sourates-search{
-  padding:1rem;border-bottom:1px solid var(--border);
-}
-.sourates-search input{
-  width:100%;background:var(--card2);border:1px solid var(--border);
-  color:var(--text);border-radius:10px;padding:0.55rem 0.9rem;
-  font-family:'Outfit',sans-serif;font-size:0.85rem;outline:none;
-}
-.sourates-search input:focus{border-color:var(--emerald-l);}
-.sourates-search input::placeholder{color:var(--muted);}
-.sourates-list{overflow-y:auto;flex:1;}
-.sourate-item{
-  display:flex;align-items:center;gap:0.75rem;
-  padding:0.7rem 1rem;cursor:pointer;
-  border-bottom:1px solid rgba(26,107,80,0.1);
-  transition:background 0.15s;
-}
-.sourate-item:hover{background:var(--card2);}
-.sourate-item.active{background:rgba(26,107,80,0.2);border-left:3px solid var(--emerald-l);}
-.sourate-num{
-  width:30px;height:30px;border-radius:8px;
-  background:var(--card2);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.72rem;font-weight:600;color:var(--emerald-l);flex-shrink:0;
-}
-.sourate-item.active .sourate-num{background:var(--emerald);border-color:var(--emerald-l);color:#fff;}
-.sourate-name-ar{font-family:'Amiri',serif;font-size:1rem;color:var(--gold-l);direction:rtl;}
-.sourate-name-en{font-size:0.75rem;color:var(--muted);}
-.sourate-ayahs{font-size:0.7rem;color:var(--muted);margin-left:auto;flex-shrink:0;}
-
-/* Reader */
-.reader-panel{
-  background:var(--card);border:1px solid var(--border);border-radius:18px;
-  overflow:hidden;
-}
-.reader-header{
-  padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;
-}
-.reader-header-left h2{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold-l);direction:rtl;}
-.reader-header-left p{font-size:0.8rem;color:var(--muted);}
-.reader-controls{display:flex;gap:0.5rem;}
-.ctrl-btn{
-  width:36px;height:36px;border-radius:10px;
-  border:1px solid var(--border);background:var(--card2);
-  color:var(--text);cursor:pointer;font-size:1rem;
-  display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s;
-}
-.ctrl-btn:hover{background:var(--emerald);border-color:var(--emerald-l);}
-.ctrl-btn.active{background:var(--emerald);border-color:var(--emerald-l);color:#fff;}
-
-/* Loading / empty */
-.reader-loading{
-  padding:4rem;text-align:center;color:var(--muted);
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loader-spin{
-  width:36px;height:36px;border:3px solid var(--border);
-  border-top-color:var(--emerald-l);border-radius:50%;
-  animation:spin 0.8s linear infinite;margin:0 auto 1rem;
+@media (max-width: 800px) {
+  .coran-wrap { grid-template-columns: 1fr; }
+  .sidebar    { position: static !important; max-height: 300px !important; }
 }
 
-/* Versets */
-.versets-body{padding:1.5rem;display:flex;flex-direction:column;gap:1.2rem;}
-.verset-item{
-  background:var(--card2);border:1px solid var(--border);border-radius:14px;
-  overflow:hidden;transition:border-color 0.2s;
+/* ---------- sidebar ---------- */
+.sidebar {
+  background: var(--c1); border: 1px solid var(--br); border-radius: 16px;
+  overflow: hidden; display: flex; flex-direction: column;
+  position: sticky; top: 80px; max-height: calc(100vh - 90px);
 }
-.verset-item:hover{border-color:rgba(26,107,80,0.5);}
-.verset-item.playing{border-color:var(--emerald-l);box-shadow:0 0 12px rgba(26,107,80,0.2);}
-.verset-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0.6rem 1rem;border-bottom:1px solid rgba(26,107,80,0.1);
+.sb-search { padding: .75rem; border-bottom: 1px solid var(--br); }
+.sb-search input {
+  width: 100%; background: var(--c2); border: 1px solid var(--br);
+  color: var(--txt); border-radius: 10px; padding: .5rem .85rem;
+  font-family: 'Outfit', sans-serif; font-size: .82rem; outline: none;
+  transition: border-color .2s;
 }
-.verset-num{
-  width:28px;height:28px;border-radius:50%;
-  background:var(--emerald);color:#fff;
-  font-size:0.72rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
-}
-.verset-play-btn{
-  background:none;border:none;cursor:pointer;
-  color:var(--muted);font-size:1rem;padding:0.2rem 0.5rem;
-  border-radius:6px;transition:all 0.2s;
-}
-.verset-play-btn:hover{color:var(--emerald-l);background:rgba(26,107,80,0.1);}
-.verset-ar{
-  font-family:'Scheherazade New',serif;
-  font-size:1.6rem;line-height:2.2;
-  text-align:right;direction:rtl;
-  color:var(--text);
-  padding:1rem 1.2rem 0.6rem;
-}
-.verset-fr{
-  font-size:0.85rem;color:var(--muted);
-  padding:0.3rem 1.2rem 1rem;
-  line-height:1.6;
-  border-top:1px solid rgba(26,107,80,0.08);
-}
-.show-fr .verset-fr{display:block;}
-.hide-fr .verset-fr{display:none;}
+.sb-search input:focus { border-color: var(--eml); }
+.sb-search input::placeholder { color: var(--mt); }
+.sb-list { overflow-y: auto; flex: 1; }
+/* custom scrollbar */
+.sb-list::-webkit-scrollbar { width: 4px; }
+.sb-list::-webkit-scrollbar-track { background: transparent; }
+.sb-list::-webkit-scrollbar-thumb { background: var(--br); border-radius: 4px; }
 
-/* Progression bar */
-.progress-banner{
-  padding:0.75rem 1.5rem;background:rgba(201,168,76,0.07);
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;gap:0.75rem;font-size:0.8rem;color:var(--muted);
+.s-item {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .6rem .9rem; cursor: pointer;
+  border-bottom: 1px solid rgba(26,107,80,.08);
+  transition: background .15s;
 }
-.progress-banner i{color:var(--gold);}
+.s-item:hover  { background: var(--c2); }
+.s-item.active { background: rgba(26,107,80,.2); border-left: 3px solid var(--eml); }
+.s-num {
+  width: 28px; height: 28px; flex-shrink: 0; border-radius: 7px;
+  background: var(--c2); border: 1px solid var(--br);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .68rem; font-weight: 700; color: var(--eml);
+}
+.s-item.active .s-num { background: var(--em); border-color: var(--eml); color: #fff; }
+.s-name-ar { font-family: 'Amiri', serif; font-size: .95rem; color: var(--gdl); direction: rtl; }
+.s-name-en { font-size: .7rem; color: var(--mt); }
+.s-ayahs   { font-size: .68rem; color: var(--mt); margin-left: auto; flex-shrink: 0; }
+
+/* ---------- reader ---------- */
+.reader {
+  background: var(--c1); border: 1px solid var(--br); border-radius: 16px;
+  overflow: hidden; display: flex; flex-direction: column; min-height: 500px;
+}
+
+/* reader header */
+.r-head {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--br);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
+}
+.r-head-name-ar { font-family: 'Scheherazade New', serif; font-size: 1.5rem; color: var(--gdl); direction: rtl; }
+.r-head-sub     { font-size: .75rem; color: var(--mt); margin-top: .1rem; }
+.r-controls     { display: flex; gap: .4rem; }
+.ctrl {
+  width: 34px; height: 34px; border-radius: 9px;
+  border: 1px solid var(--br); background: var(--c2); color: var(--txt);
+  cursor: pointer; font-size: .85rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.ctrl:hover { background: var(--em); border-color: var(--eml); }
+.ctrl.on    { background: var(--em); border-color: var(--eml); color: #fff; }
+
+/* reader body */
+.r-body { flex: 1; overflow-y: auto; padding: 1.25rem; }
+.r-body::-webkit-scrollbar { width: 4px; }
+.r-body::-webkit-scrollbar-thumb { background: var(--br); border-radius: 4px; }
+
+/* loading */
+.r-loading {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 4rem 1rem; color: var(--mt); gap: 1rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin-ring {
+  width: 32px; height: 32px;
+  border: 3px solid var(--br); border-top-color: var(--eml);
+  border-radius: 50%; animation: spin .8s linear infinite;
+}
+
+/* versets */
+.verset {
+  background: var(--c2); border: 1px solid var(--br); border-radius: 12px;
+  margin-bottom: .9rem; overflow: hidden; transition: border-color .2s;
+}
+.verset:hover   { border-color: rgba(26,107,80,.55); }
+.verset.playing { border-color: var(--eml); box-shadow: 0 0 14px rgba(26,107,80,.2); }
+
+.verset-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .45rem .9rem; border-bottom: 1px solid rgba(26,107,80,.08);
+}
+.v-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--em); color: #fff;
+  font-size: .68rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.v-play {
+  background: none; border: none; cursor: pointer; color: var(--mt);
+  font-size: .95rem; padding: .2rem .45rem; border-radius: 6px; transition: all .2s;
+}
+.v-play:hover { color: var(--eml); background: rgba(26,107,80,.12); }
+
+.verset-ar {
+  font-family: 'Scheherazade New', serif;
+  font-size: 1.55rem; line-height: 2.1;
+  text-align: right; direction: rtl; color: var(--txt);
+  padding: .9rem 1rem .5rem;
+}
+.verset-fr {
+  font-size: .82rem; color: var(--mt); line-height: 1.65;
+  padding: .3rem 1rem .9rem;
+  border-top: 1px solid rgba(26,107,80,.07);
+}
+.hide-trad .verset-fr { display: none; }
+
+/* progress bar */
+.r-progress {
+  padding: .6rem 1.25rem;
+  background: rgba(201,168,76,.06);
+  border-top: 1px solid var(--br);
+  font-size: .76rem; color: var(--mt);
+  display: flex; align-items: center; gap: .5rem;
+}
+.r-progress i { color: var(--gd); }
 </style>
 </head>
 <body>
-<div class="page-wrapper">
+<div class="yw-shell">
 
-<?php if (file_exists(__DIR__ . '/../../../../view/sections/vitrine/menu.php')) {
-    require_once __DIR__ . '/../../../../view/sections/vitrine/menu.php';
-} ?>
+<?php
+$menuPath = __DIR__ . '/../../../../view/sections/vitrine/menu.php';
+if (file_exists($menuPath)) require_once $menuPath;
+?>
 
-<!-- Hero -->
-<section class="coran-hero">
-  <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
-  <h1>القرآن الكريم</h1>
-  <p>Lecture du Saint Coran avec traduction</p>
-</section>
+<main class="yw-main">
 
-<!-- Layout -->
-<div class="coran-layout">
-
-  <!-- Sidebar sourates -->
-  <aside class="sourates-panel">
-    <div class="sourates-search">
-      <input type="text" id="searchSourate" placeholder="Rechercher une sourate…" oninput="filterSourates()">
-    </div>
-    <div class="sourates-list" id="souratesList">
-      <?php if (!empty($listeSourates)): foreach ($listeSourates as $s): ?>
-      <div class="sourate-item <?= (int)($s['number']??0)===1?'active':'' ?>"
-           data-num="<?= (int)($s['number']??0) ?>"
-           data-name="<?= htmlspecialchars(strtolower(($s['englishName']??'').' '.($s['name']??''))) ?>"
-           onclick="chargerSourate(<?= (int)($s['number']??0) ?>, this)">
-        <div class="sourate-num"><?= (int)($s['number']??0) ?></div>
-        <div>
-          <div class="sourate-name-ar"><?= htmlspecialchars($s['name'] ?? '') ?></div>
-          <div class="sourate-name-en"><?= htmlspecialchars($s['englishName'] ?? '') ?></div>
-        </div>
-        <div class="sourate-ayahs"><?= (int)($s['numberOfAyahs']??0) ?>v</div>
-      </div>
-      <?php endforeach; else: ?>
-      <p style="color:var(--muted);padding:2rem;text-align:center;">Liste indisponible</p>
-      <?php endif; ?>
-    </div>
-  </aside>
-
-  <!-- Reader -->
-  <section class="reader-panel">
-    <div class="reader-header">
-      <div class="reader-header-left">
-        <h2 id="headerAr">الفاتحة</h2>
-        <p id="headerEn">Al-Fatiha · 7 versets</p>
-      </div>
-      <div class="reader-controls">
-        <button class="ctrl-btn active" id="btnFr" onclick="toggleTrad()" title="Traduction">fr</button>
-        <button class="ctrl-btn" id="btnAutoplay" onclick="toggleAutoplay()" title="Lecture auto"><i class="bi bi-skip-end"></i></button>
-      </div>
-    </div>
-
-    <div id="readerContent">
-      <div class="reader-loading">
-        <div class="loader-spin"></div>
-        Chargement…
-      </div>
-    </div>
-
-    <div class="progress-banner" id="progressBanner" style="display:none">
-      <i class="bi bi-bookmark-check"></i>
-      <span id="progressText"></span>
-    </div>
+  <!-- hero -->
+  <section class="hero">
+    <span class="bsm">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</span>
+    <h1>القرآن الكريم</h1>
+    <p>Lecture du Saint Coran avec traduction française</p>
   </section>
 
-</div><!-- end layout -->
+  <div class="coran-wrap">
 
-<?php if (file_exists(__DIR__ . '/../../../../view/sections/vitrine/footer.php')) {
-    require_once __DIR__ . '/../../../../view/sections/vitrine/footer.php';
-} ?>
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="sidebar">
+      <div class="sb-search">
+        <input type="text" id="sbSearch" placeholder="Rechercher une sourate…" oninput="filtrerSourates(this.value)">
+      </div>
+      <div class="sb-list" id="sbList">
+        <?php if (empty($listeSourates)): ?>
+          <p style="padding:1.5rem;text-align:center;color:var(--mt);font-size:.82rem;">
+            Liste indisponible — vérifiez la connexion à l'API.
+          </p>
+        <?php else: ?>
+          <?php foreach ($listeSourates as $s):
+            $num  = (int)($s['number'] ?? 0);
+            $nameAr = htmlspecialchars($s['name'] ?? '');
+            $nameEn = htmlspecialchars($s['englishName'] ?? '');
+            $ayahs  = (int)($s['numberOfAyahs'] ?? 0);
+            $isActive = ($num === $sourateNum) ? 'active' : '';
+            $dataSearch = strtolower($nameEn . ' ' . ($s['name'] ?? '') . ' ' . $num);
+          ?>
+          <div class="s-item <?= $isActive ?>"
+               data-num="<?= $num ?>"
+               data-search="<?= htmlspecialchars($dataSearch) ?>"
+               onclick="chargerSourate(<?= $num ?>, this)">
+            <div class="s-num"><?= $num ?></div>
+            <div>
+              <div class="s-name-ar"><?= $nameAr ?></div>
+              <div class="s-name-en"><?= $nameEn ?></div>
+            </div>
+            <div class="s-ayahs"><?= $ayahs ?>v</div>
+          </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+    </aside>
 
-<audio id="audioPlayer" style="display:none"></audio>
+    <!-- ====== READER ====== -->
+    <section class="reader" id="reader">
+
+      <!-- en-tête reader -->
+      <div class="r-head">
+        <div>
+          <div class="r-head-name-ar" id="rNameAr">
+            <?= htmlspecialchars($sourateActive['name'] ?? 'الفاتحة') ?>
+          </div>
+          <div class="r-head-sub" id="rNameEn">
+            <?= htmlspecialchars($sourateActive['englishName'] ?? 'Al-Fatiha') ?>
+            &nbsp;·&nbsp;
+            <?= (int)($sourateActive['numberOfAyahs'] ?? 0) ?> versets
+            &nbsp;·&nbsp;
+            <?= htmlspecialchars($sourateActive['revelationType'] ?? '') ?>
+          </div>
+        </div>
+        <div class="r-controls">
+          <button class="ctrl on" id="btnTrad" onclick="toggleTrad()" title="Traduction">fr</button>
+          <button class="ctrl"    id="btnAuto" onclick="toggleAuto()" title="Lecture auto">
+            <i class="bi bi-skip-end"></i>
+          </button>
+          <button class="ctrl" onclick="scrollTop()" title="Haut">
+            <i class="bi bi-arrow-up"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- corps versets -->
+      <div class="r-body" id="rBody">
+        <?php if (empty($versets)): ?>
+          <div class="r-loading">
+            <div class="spin-ring"></div>
+            Chargement des versets…
+          </div>
+        <?php else: ?>
+          <?php foreach ($versets as $v):
+            $vNum  = (int)($v['number'] ?? 0);
+            $texAr = $v['texteAr'] ?? '';
+            $texFr = $v['texteFr'] ?? '';
+            $audio = htmlspecialchars($v['audio'] ?? '');
+          ?>
+          <div class="verset" id="v<?= $vNum ?>" data-num="<?= $vNum ?>" data-audio="<?= $audio ?>">
+            <div class="verset-top">
+              <div class="v-num"><?= $vNum ?></div>
+              <?php if ($audio): ?>
+              <button class="v-play" onclick="jouer(<?= $vNum ?>)" id="btn<?= $vNum ?>">
+                <i class="bi bi-play-circle"></i>
+              </button>
+              <?php endif; ?>
+            </div>
+            <div class="verset-ar"><?= htmlspecialchars($texAr) ?></div>
+            <?php if ($texFr): ?>
+            <div class="verset-fr"><?= htmlspecialchars($texFr) ?></div>
+            <?php endif; ?>
+          </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+
+      <!-- barre progression -->
+      <div class="r-progress" id="rProgress" style="display:none">
+        <i class="bi bi-bookmark-check-fill"></i>
+        <span id="rProgressTxt"></span>
+      </div>
+
+    </section><!-- end reader -->
+
+  </div><!-- end coran-wrap -->
+</main>
+
+<?php
+$footerPath = __DIR__ . '/../../../../view/sections/vitrine/footer.php';
+if (file_exists($footerPath)) require_once $footerPath;
+?>
+
+</div><!-- end yw-shell -->
+
+<audio id="player" preload="none"></audio>
 
 <script>
-const BASE      = '../../../../index.php';
+/* ============================================================
+   ÉTAT GLOBAL
+   ============================================================ */
+const ROOT      = '<?= $root ?>';
+const AJAX_URL  = ROOT + 'index.php';
+let curSura     = <?= $sourateNum ?>;
 let showTrad    = true;
-let autoplay    = false;
-let currentSura = 1;
-let versetsList = [];
-let playingIdx  = -1;
+let autoPlay    = false;
+let playingNum  = -1;
+const player    = document.getElementById('player');
 
-<?php if (!empty($progression)): ?>
-const savedSura = <?= (int)($progression['sourate_num']??1) ?>;
-const savedVers = <?= (int)($progression['verset_num']??1) ?>;
+<?php if ($progression): ?>
+const savedSura = <?= (int)$progression['sourate_num'] ?>;
+const savedVers = <?= (int)$progression['verset_num'] ?>;
 <?php else: ?>
-const savedSura = 1, savedVers = 1;
+const savedSura = <?= $sourateNum ?>;
+const savedVers = 1;
 <?php endif; ?>
 
-/* ---- Init ---- */
+/* ============================================================
+   INIT : scroll vers progression sauvegardée
+   ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
-  chargerSourate(savedSura, document.querySelector(`[data-num="${savedSura}"]`));
+  // Scroll sidebar vers la sourate active
+  const activeItem = document.querySelector('.s-item.active');
+  if (activeItem) activeItem.scrollIntoView({ block: 'center' });
+
+  // Scroll reader vers le verset sauvegardé
   if (savedVers > 1) {
     setTimeout(() => {
-      const el = document.querySelector(`[data-verset="${savedVers}"]`);
-      if (el) el.scrollIntoView({behavior:'smooth',block:'center'});
-    }, 1200);
+      const el = document.getElementById('v' + savedVers);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 400);
   }
 });
 
-/* ---- Charger une sourate ---- */
+/* ============================================================
+   CHARGER UNE SOURATE (AJAX)
+   ============================================================ */
 function chargerSourate(num, el) {
-  currentSura = num;
-  document.querySelectorAll('.sourate-item').forEach(i => i.classList.remove('active'));
-  if (el) el.classList.add('active');
+  if (num === curSura && el?.classList.contains('active')) return;
 
-  document.getElementById('readerContent').innerHTML =
-    `<div class="reader-loading"><div class="loader-spin"></div>Chargement…</div>`;
+  curSura = num;
 
-  fetch(`${BASE}?action=ajax_versets&sourate=${num}`)
-    .then(r => r.json())
+  // UI sidebar
+  document.querySelectorAll('.s-item').forEach(i => i.classList.remove('active'));
+  if (el) { el.classList.add('active'); el.scrollIntoView({ block: 'nearest' }); }
+
+  // Stop audio en cours
+  if (playingNum >= 0) { player.pause(); resetBtnIcon(playingNum); playingNum = -1; }
+
+  // Afficher loader dans le reader
+  const rBody = document.getElementById('rBody');
+  rBody.innerHTML = '<div class="r-loading"><div class="spin-ring"></div>Chargement…</div>';
+  document.getElementById('rNameAr').textContent  = '…';
+  document.getElementById('rNameEn').textContent  = '…';
+
+  fetch(`${AJAX_URL}?action=ajax_versets&sourate=${num}`)
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(data => {
-      if (data.success && data.versets) {
-        versetsList = data.versets;
-        renderVersets(data.versets, data.meta || {});
-        saveProgress(num, 1);
-      } else {
-        document.getElementById('readerContent').innerHTML =
-          `<div class="reader-loading">Erreur de chargement.</div>`;
-      }
+      if (!data.success) throw new Error('API error');
+      afficherVersets(data.versets || [], data.meta || {});
     })
-    .catch(() => {
-      document.getElementById('readerContent').innerHTML =
-        `<div class="reader-loading">Erreur réseau.</div>`;
+    .catch(err => {
+      rBody.innerHTML = `<div class="r-loading" style="color:#e74c3c;">
+        <i class="bi bi-exclamation-triangle" style="font-size:1.5rem"></i>
+        Erreur de chargement (${err.message})
+      </div>`;
     });
 }
 
-function renderVersets(versets, meta) {
-  document.getElementById('headerAr').textContent = meta.nameAr || '';
-  document.getElementById('headerEn').textContent =
-    `${meta.nameEn || ''} · ${versets.length} versets`;
+/* ============================================================
+   AFFICHER LES VERSETS
+   ============================================================ */
+function afficherVersets(versets, meta) {
+  // Header
+  document.getElementById('rNameAr').textContent = meta.nameAr || '';
+  document.getElementById('rNameEn').textContent =
+    (meta.nameEn || '') + ' · ' + (meta.ayahs || versets.length) + ' versets';
 
-  const trad = showTrad ? 'show-fr' : 'hide-fr';
-  const html = versets.map((v,i) => `
-    <div class="verset-item ${trad}" data-verset="${v.number}" data-audio="${v.audio||''}">
-      <div class="verset-header">
-        <div class="verset-num">${v.number}</div>
-        <button class="verset-play-btn" onclick="playVerset(${i})">
-          <i class="bi bi-play-circle" id="playIcon${i}"></i>
-        </button>
-      </div>
-      <div class="verset-ar">${v.texteAr || ''}</div>
-      <div class="verset-fr">${v.texteFr || ''}</div>
-    </div>`).join('');
-
-  document.getElementById('readerContent').innerHTML =
-    `<div class="versets-body">${html}</div>`;
-}
-
-/* ---- Lecture audio ---- */
-const player = document.getElementById('audioPlayer');
-
-function playVerset(idx) {
-  const v = versetsList[idx];
-  if (!v || !v.audio) return;
-
-  if (playingIdx === idx) {
-    player.paused ? player.play() : player.pause();
+  if (!versets.length) {
+    document.getElementById('rBody').innerHTML =
+      '<div class="r-loading">Aucun verset disponible.</div>';
     return;
   }
 
-  if (playingIdx >= 0) {
-    const old = document.getElementById(`playIcon${playingIdx}`);
-    if (old) old.className = 'bi bi-play-circle';
-    document.querySelector(`[data-verset="${versetsList[playingIdx].number}"]`)
-      ?.classList.remove('playing');
+  const tradClass = showTrad ? '' : 'hide-trad';
+  let html = '';
+
+  versets.forEach(v => {
+    const num   = parseInt(v.number) || 0;
+    const texAr = escHtml(v.texteAr || '');
+    const texFr = escHtml(v.texteFr || '');
+    const audio = escAttr(v.audio   || '');
+
+    const playBtn = audio
+      ? `<button class="v-play" onclick="jouer(${num})" id="btn${num}">
+           <i class="bi bi-play-circle"></i>
+         </button>`
+      : '';
+    const frDiv = texFr
+      ? `<div class="verset-fr">${texFr}</div>`
+      : '';
+
+    html += `
+      <div class="verset ${tradClass}" id="v${num}" data-num="${num}" data-audio="${audio}">
+        <div class="verset-top">
+          <div class="v-num">${num}</div>
+          ${playBtn}
+        </div>
+        <div class="verset-ar">${texAr}</div>
+        ${frDiv}
+      </div>`;
+  });
+
+  document.getElementById('rBody').innerHTML = html;
+  document.getElementById('rBody').scrollTop = 0;
+}
+
+/* ============================================================
+   LECTURE AUDIO
+   ============================================================ */
+function jouer(num) {
+  const el  = document.getElementById('v' + num);
+  const url = el ? el.dataset.audio : '';
+
+  if (!url) return;
+
+  // Même verset — pause / reprise
+  if (playingNum === num) {
+    player.paused ? player.play() : player.pause();
+    updateBtnIcon(num, player.paused ? 'bi-play-circle' : 'bi-pause-circle');
+    return;
   }
 
-  playingIdx = idx;
-  player.src = v.audio;
-  player.play().catch(()=>{});
-  document.getElementById(`playIcon${idx}`).className = 'bi bi-pause-circle';
-  document.querySelector(`[data-verset="${v.number}"]`).classList.add('playing');
-  saveProgress(currentSura, v.number);
+  // Arrêter le précédent
+  if (playingNum >= 0) { resetBtnIcon(playingNum); }
+  document.querySelectorAll('.verset').forEach(v => v.classList.remove('playing'));
+
+  // Lancer le nouveau
+  playingNum = num;
+  player.src = url;
+  player.play().catch(() => {});
+  updateBtnIcon(num, 'bi-pause-circle');
+  el.classList.add('playing');
+  sauvegarderProgression(curSura, num);
 
   player.onended = () => {
-    document.getElementById(`playIcon${idx}`).className = 'bi bi-play-circle';
-    document.querySelector(`[data-verset="${v.number}"]`)?.classList.remove('playing');
-    playingIdx = -1;
-    if (autoplay && idx + 1 < versetsList.length) playVerset(idx + 1);
+    resetBtnIcon(num);
+    el.classList.remove('playing');
+    playingNum = -1;
+
+    if (autoPlay) {
+      const next = document.getElementById('v' + (num + 1));
+      if (next) jouer(num + 1);
+    }
   };
 }
 
-/* ---- Toggles ---- */
+function updateBtnIcon(num, icon) {
+  const btn = document.getElementById('btn' + num);
+  if (btn) btn.querySelector('i').className = 'bi ' + icon;
+}
+function resetBtnIcon(num) { updateBtnIcon(num, 'bi-play-circle'); }
+
+/* ============================================================
+   CONTRÔLES
+   ============================================================ */
 function toggleTrad() {
   showTrad = !showTrad;
-  document.getElementById('btnFr').classList.toggle('active', showTrad);
-  document.querySelectorAll('.verset-item').forEach(el => {
-    el.classList.toggle('show-fr', showTrad);
-    el.classList.toggle('hide-fr', !showTrad);
-  });
+  document.getElementById('btnTrad').classList.toggle('on', showTrad);
+  document.querySelectorAll('.verset').forEach(v => v.classList.toggle('hide-trad', !showTrad));
 }
 
-function toggleAutoplay() {
-  autoplay = !autoplay;
-  document.getElementById('btnAutoplay').classList.toggle('active', autoplay);
+function toggleAuto() {
+  autoPlay = !autoPlay;
+  document.getElementById('btnAuto').classList.toggle('on', autoPlay);
 }
 
-/* ---- Progression ---- */
-function saveProgress(sura, verset) {
-  <?php if (!empty($userId)): ?>
-  fetch(`${BASE}?action=ajax_progression_coran`, {
-    method:'POST',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:`sourate=${sura}&verset=${verset}`
-  });
-  const banner = document.getElementById('progressBanner');
-  document.getElementById('progressText').textContent =
-    `Progression sauvegardée : Sourate ${sura}, verset ${verset}`;
-  banner.style.display = 'flex';
-  setTimeout(()=>banner.style.display='none', 2500);
+function scrollTop() {
+  document.getElementById('rBody').scrollTop = 0;
+}
+
+/* ============================================================
+   SAUVEGARDE PROGRESSION
+   ============================================================ */
+function sauvegarderProgression(sura, verset) {
+  <?php if ($userId): ?>
+  fetch(`${AJAX_URL}?action=ajax_progression_coran`, {
+    method : 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body   : `sourate=${sura}&verset=${verset}`
+  }).catch(() => {});
+
+  const bar = document.getElementById('rProgress');
+  document.getElementById('rProgressTxt').textContent =
+    `Progression : Sourate ${sura}, verset ${verset}`;
+  bar.style.display = 'flex';
+  clearTimeout(bar._t);
+  bar._t = setTimeout(() => bar.style.display = 'none', 3000);
   <?php endif; ?>
 }
 
-/* ---- Recherche sourates ---- */
-function filterSourates() {
-  const q = document.getElementById('searchSourate').value.toLowerCase();
-  document.querySelectorAll('.sourate-item').forEach(el => {
-    el.style.display = el.dataset.name?.includes(q) ? '' : 'none';
+/* ============================================================
+   RECHERCHE SOURATES
+   ============================================================ */
+function filtrerSourates(q) {
+  const term = q.toLowerCase().trim();
+  document.querySelectorAll('#sbList .s-item').forEach(el => {
+    const match = !term || (el.dataset.search || '').includes(term);
+    el.style.display = match ? '' : 'none';
   });
+}
+
+/* ============================================================
+   UTILITAIRES
+   ============================================================ */
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) {
+  return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 </script>
 </body>
