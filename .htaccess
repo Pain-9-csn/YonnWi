@@ -17,8 +17,6 @@ RewriteRule ^listeCapture$ view/pages/admin/dictaphone/captureAudio.php
 RewriteRule ^corbeilleCapture$ view/pages/admin/dictaphone/corbeilleCapture.php
 #horaires 
 RewriteRule ^listeHeures$ view/pages/admin/horairesprieres/listeHeuresprieres.php
-#horairesvitrine
-RewriteRule ^listeHeures$ view/pages/vitrine/horairesprieres/listeHeuresprieres.php
 # localisation 
 RewriteRule ^listeLoc$ view/pages/admin/localisation/listeLoc.php
 #qibla 
@@ -44,7 +42,9 @@ RewriteRule ^Dictaphone$ view/pages/vitrine/dictaphone/voc.php
 RewriteRule ^Lecteur$ view/pages/vitrine/lecteur/lecteur.php
 ###############Qibla##############
 RewriteRule ^Qibla$ view/pages/vitrine/qibla/qibla.php
-#################Xassida##################
-RewriteRule ^Xassida$ view/pages/vitrine/xassida/listeXassida.php
-###################horairesprieres##############
-RewriteRule ^PrayerTime$ view/pages/vitrine/horairesPrieres/listeHeuresprieres.php
+###############Douas##############
+RewriteRule ^Douas$ controller/DouasController.php
+###############Khassidapdf##############
+RewriteRule ^Khassidapdf$ controller/XassidaController.php
+###############Horaires##############
+RewriteRule ^listHeures$ controller/HorairePrieresController.php

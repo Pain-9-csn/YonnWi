@@ -1,11 +1,15 @@
+<?php
+/**
+ * @var string $lang
+ * @var array $traduction
+ */
+?>
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="<?= $lang ?>" dir="<?= $traduction['dir'] ?>">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Douas & Invocations - YoonWi</title>
-    <link href="public/templates/templateVitrine/assets/img/favicon.png" rel="icon">
+    <title><?= $traduction['titre'] ?></title>    <link href="public/templates/templateVitrine/assets/img/favicon.png" rel="icon">
     <link href="public/templates/templateVitrine/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="public/templates/templateVitrine/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="public/templates/templateVitrine/assets/vendor/aos/aos.css" rel="stylesheet">
@@ -358,8 +362,8 @@
 <!-- HERO -->
 <div class="page-hero">
     <div class="container">
-        <h1><i class="bi bi-heart-fill"></i> Douas & Invocations</h1>
-        <p>Vos invocations quotidiennes en arabe avec traduction</p>
+        <h1><i class="bi bi-heart-fill"></i> <?= $traduction['titre'] ?></h1>
+        <p><?= $traduction['sous_titre'] ?></p>
     </div>
 </div>
 
@@ -367,12 +371,12 @@
 
     <!-- FILTRES -->
     <div class="filter-btns">
-        <button class="filter-btn active" onclick="filtrer('tous', this)">Tous</button>
-        <button class="filter-btn" onclick="filtrer('matin', this)">🌅 Matin</button>
-        <button class="filter-btn" onclick="filtrer('soir', this)">🌙 Soir</button>
-        <button class="filter-btn" onclick="filtrer('priere', this)">🕌 Après la prière</button>
-        <button class="filter-btn" onclick="filtrer('quotidien', this)">📅 Quotidien</button>
-        <button class="filter-btn" onclick="filtrer('protection', this)">🛡️ Protection</button>
+        <button class="filter-btn active" onclick="filtrer('tous', this)"><?= $traduction['tous'] ?></button>
+        <button class="filter-btn" onclick="filtrer('matin', this)"><?= $traduction['matin'] ?></button>
+        <button class="filter-btn" onclick="filtrer('soir', this)"><?= $traduction['soir'] ?></button>
+        <button class="filter-btn" onclick="filtrer('priere', this)"><?= $traduction['priere'] ?></button>
+        <button class="filter-btn" onclick="filtrer('quotidien', this)"><?= $traduction['quotidien'] ?></button>
+        <button class="filter-btn" onclick="filtrer('protection', this)"><?= $traduction['protection'] ?></button>
     </div>
 
     <!-- COMPTEUR -->
@@ -590,8 +594,7 @@
                 <div class="doua-title"><?= $doua['titre'] ?></div>
                 <div class="doua-arabic"><?= $doua['arabe'] ?></div>
                 <div class="doua-translation"><?= $doua['traduction'] ?></div>
-                <div class="doua-source">📖 <?= $doua['source'] ?></div>
-            </div>
+                <div class="doua-source">📖 <?= $traduction['source'] ?> : <?= $doua['source'] ?></div>            </div>
         </div>
         <?php endforeach; ?>
 

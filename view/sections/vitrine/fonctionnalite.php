@@ -14,7 +14,7 @@
               <div class="icon">
                 <i class="bi bi-music-note-beamed"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="Khassidapdf" class="stretched-link">
                 <h3>Khassidas</h3>
               </a>
               <p>Accédez à une large bibliothèque de Khassidas. Écoutez et lisez les poèmes spirituels de vos marabouts préférés à tout moment.</p>
@@ -26,7 +26,7 @@
               <div class="icon">
                 <i class="bi bi-book"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="Coran" class="stretched-link">
                 <h3>Coran</h3>
               </a>
               <p>Lisez et écoutez le Coran avec sa traduction en français. Naviguez facilement entre les sourates et les versets.</p>
@@ -38,7 +38,7 @@
               <div class="icon">
                 <i class="bi bi-clock"></i>
               </div>
-              <a href="index.php?action=horairesprieres" class="stretched-link">
+              <a href="listHeures" class="stretched-link">
                 <h3>Heures de Prière</h3>
               </a>
               <p>Consultez les horaires de prière selon votre localisation. Recevez des notifications automatiques pour chaque prière de la journée.</p>
@@ -50,7 +50,7 @@
               <div class="icon">
                 <i class="bi bi-compass"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="Qibla" class="stretched-link">
                 <h3>Qibla</h3>
               </a>
               <p>Trouvez la direction de La Mecque où que vous soyez grâce à notre boussole intégrée. Priez toujours dans la bonne direction.</p>
@@ -62,7 +62,7 @@
               <div class="icon">
                 <i class="bi bi-headphones"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="Lecteur" class="stretched-link">
                 <h3>Lecteur MP3</h3>
               </a>
               <p>Profitez d'un lecteur audio intégré pour écouter vos Khassidas et récitations coraniques avec une qualité sonore optimale.</p>
@@ -74,7 +74,7 @@
               <div class="icon">
                 <i class="bi bi-mic"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="Saisievocale" class="stretched-link">
                 <h3>Saisie Vocale</h3>
               </a>
               <p>Recherchez facilement vos contenus spirituels par la voix. Dites simplement le nom d'une sourate ou d'un Khassida et YoonWi le trouve pour vous.</p>

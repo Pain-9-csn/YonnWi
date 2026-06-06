@@ -32,10 +32,11 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
           <!-- Liens principaux -->
           <ul>
             <li><a href="Coran"><i class="bi bi-book"></i>&nbsp; Coran</a></li>
-            <li><a href="Xassida"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
+
+            <li><a href="Khassidapdf"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
             <li><a href="Lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
             <li><a href="Dictaphone"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
-            <li><a href="PrayerTime"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
+            <li><a href="listHeures"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
             <li><a href="Qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
           </ul>
           &nbsp; &nbsp;
@@ -62,7 +63,7 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
               </ul>
             </li>
           <?php else: ?>
-            <li>&nbsp; &nbsp;<a href="login.php" class="btn-get-started"><i class="bi bi-person-circle"></i>&nbsp; &nbsp;Se Connecter</a></li>
+            <li>&nbsp; &nbsp;<a href="login" class="btn-get-started"><i class="bi bi-person-circle"></i>&nbsp; &nbsp;Se Connecter</a></li>
           <?php endif; ?>
 
         </ul>

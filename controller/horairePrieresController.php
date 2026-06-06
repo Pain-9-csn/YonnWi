@@ -208,3 +208,5 @@ class HorairePrieresController
         return $textes[$lang] ?? $textes['fr'];
     }
 }
+$controller = new HorairePrieresController();
+$controller->index();

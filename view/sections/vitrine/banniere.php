@@ -21,28 +21,28 @@
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-book"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Coran</a></h4>
+                <h4 class="title"><a href="Coran" class="stretched-link">Coran</a></h4>
               </div>
             </div>
 
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-music-note-beamed"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Khassidas</a></h4>
+                <h4 class="title"><a href="Khassidapdf" class="stretched-link">Khassidas</a></h4>
               </div>
             </div>
 
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-clock"></i></div>
-                <h4 class="title"><a href="index.php?action=horairesprieres" class="stretched-link">Heures de Prière</a></h4>
+                <h4 class="title"><a href="listHeures" class="stretched-link">Heures de Prière</a></h4>
               </div>
             </div>
 
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-heart"></i></div>
-                <h4 class="title"><a href="index.php?action=douas" class="stretched-link">Douas & Invocations</a></h4>
+                <h4 class="title"><a href="Douas" class="stretched-link">Douas & Invocations</a></h4>
               </div>
             </div>
 
