@@ -340,19 +340,19 @@
 
         }
         .prayer-name {
-    font-size: 0.85rem;
-    color: #555;
-    margin-bottom: 4px;
-    display: block !important;
-}
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 4px;
+            display: block !important;
+        }
 
-.event-date {
-    color: #777;
-    font-size: .85rem;
-    display: block !important;
-    margin-top: 6px;
-    font-weight: 500;
-}
+        .event-date {
+            color: #777;
+            font-size: .85rem;
+            display: block !important;
+            margin-top: 6px;
+            font-weight: 500;
+        }
 
     </style>
 

@@ -18,7 +18,7 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
         <ul>
 
           <!-- Accueil avec dropdown des sections -->
-          <li class="dropdown"><a href="#hero"><i class="bi bi-house"></i>&nbsp; Accueil <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="Home"><i class="bi bi-house"></i>&nbsp; Accueil <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="index.php#about"><i class="bi bi-bell"></i>&nbsp; Rappels</a></li>
               <li><a href="index.php#services"><i class="bi bi-grid"></i>&nbsp; Fonctionnalités</a></li>
@@ -31,12 +31,12 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
 
           <!-- Liens principaux -->
           <ul>
-            <li><a href="index.php?action=coran"><i class="bi bi-book"></i>&nbsp; Coran</a></li>
-            <li><a href="index.php?action=khassidapdf"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
-            <li><a href="index.php?action=lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
-            <li><a href="index.php?action=saisievocale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
-            <li><a href="index.php?action=horairesprieres"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
-            <li><a href="index.php?action=qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
+            <li><a href="Coran"><i class="bi bi-book"></i>&nbsp; Coran</a></li>
+            <li><a href="Khassidapdf"><i class="bi bi-file-pdf"></i>&nbsp; Khassida PDF</a></li>
+            <li><a href="Lecteur"><i class="bi bi-headphones"></i>&nbsp; Lecteur</a></li>
+            <li><a href="Saisievocale"><i class="bi bi-mic"></i>&nbsp; Saisie Vocale</a></li>
+            <li><a href="listHeures"><i class="bi bi-clock"></i>&nbsp; Horaires de Prière</a></li>
+            <li><a href="Qibla"><i class="bi bi-compass"></i>&nbsp; Qibla</a></li>
           </ul>
           &nbsp; &nbsp;
 
@@ -62,7 +62,7 @@ $nomUtilisateur = $_SESSION['utilisateur_nom'] ?? '';
               </ul>
             </li>
           <?php else: ?>
-            <li>&nbsp; &nbsp;<a href="login.php" class="btn-get-started"><i class="bi bi-person-circle"></i>&nbsp; &nbsp;Se Connecter</a></li>
+            <li>&nbsp; &nbsp;<a href="login" class="btn-get-started"><i class="bi bi-person-circle"></i>&nbsp; &nbsp;Se Connecter</a></li>
           <?php endif; ?>
 
         </ul>

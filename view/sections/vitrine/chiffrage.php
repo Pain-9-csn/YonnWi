@@ -22,7 +22,7 @@
                 <li>Écoute des sourates</li>
                 <li>Recherche par verset</li>
               </ul>
-              <a href="index.php?action=coran" class="btn-buy">Découvrir</a>
+              <a href="Coran" class="btn-buy">Découvrir</a>
             </div>
           </div>
 
@@ -39,7 +39,7 @@
                 <li>Écoute audio</li>
                 <li>Téléchargement offline</li>
               </ul>
-              <a href="index.php?action=xassida" class="btn-buy">Découvrir</a>
+              <a href="Khassidapdf" class="btn-buy">Découvrir</a>
             </div>
           </div>
 
@@ -56,7 +56,7 @@
                 <li>Traduction en français</li>
                 <li>Rappels quotidiens</li>
               </ul>
-              <a href="index.php?action=douas" class="btn-buy">Découvrir</a>
+              <a href="Douas" class="btn-buy">Découvrir</a>
             </div>
           </div>
 
@@ -72,7 +72,7 @@
                 <li>Direction de la Qibla</li>
                 <li>Dates importantes</li>
               </ul>
-              <a href="index.php?action=horairesprieres" class="btn-buy">Découvrir</a>
+              <a href="listHeures" class="btn-buy">Découvrir</a>
             </div>
           </div>
 

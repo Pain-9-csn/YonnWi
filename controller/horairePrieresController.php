@@ -346,3 +346,5 @@ class HorairePrieresController
         . '/../view/pages/vitrine/horairesprieres/listeHeuresprieres.php';
     }
 }
+$controller = new HorairePrieresController();
+$controller->index();
