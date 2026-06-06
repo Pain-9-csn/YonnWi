@@ -42,9 +42,3 @@ RewriteRule ^Dictaphone$ view/pages/vitrine/dictaphone/voc.php
 RewriteRule ^Lecteur$ view/pages/vitrine/lecteur/lecteur.php
 ###############Qibla##############
 RewriteRule ^Qibla$ view/pages/vitrine/qibla/qibla.php
-###############Douas##############
-RewriteRule ^Douas$ controller/DouasController.php
-###############Khassidapdf##############
-RewriteRule ^Khassidapdf$ controller/XassidaController.php
-###############Horaires##############
-RewriteRule ^listHeures$ controller/HorairePrieresController.php
