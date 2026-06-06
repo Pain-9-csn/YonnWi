@@ -4,17 +4,16 @@ class DB
     private $host;
     private $dbname;
     private $user;
-    private $password;
-    private $role;
+    private $password;  
     private $db;
-
+    private $role;
     public function __construct()
     {
         $this->host     = getenv('DB_HOST') ?: 'localhost';
         $this->dbname   = getenv('DB_NAME') ?: 'yoonwi';
         $this->user     = getenv('DB_USER') ?: 'root';
         $this->password = getenv('DB_PASSWORD') ?: '';
-        $this->role = getenv('DB_ROLE') ?: '';
+        $this->role = getenv('DB_ROLE') ?: 'user';
         $this->connect();
     }
 
