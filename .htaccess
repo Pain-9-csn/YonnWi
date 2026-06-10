@@ -30,6 +30,8 @@ RewriteRule ^listeHist$ view/pages/admin/historique/listeHist.php
 RewriteRule ^corbeilleHist$ view/pages/admin/historique/corbeilleHist.php
 #parametres 
 RewriteRule ^listePara$ view/pages/admin/parametres/settings.php
+#DOUAS
+RewriteRule ^listeDouas$ view/pages/admin/douas/listeDouas.php
 #NEWSLETTERS 
 RewriteRule ^listeNews$ view/pages/admin/newsletters/listeNews.php
 RewriteRule ^corbeilleNews$ view/pages/admin/newsletters/corbeilleNews.php

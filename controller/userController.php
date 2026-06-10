@@ -8,30 +8,48 @@ class UserController
 
     public function __construct()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $db        = new DB();
         $this->pdo = $db->getConnexion();
     }
 
+    // ─────────────────────────────────────────────
+    // Helpers session
+    // ─────────────────────────────────────────────
 
     public function isLoggedIn(): bool
     {
         return !empty($_SESSION['user_id']);
     }
 
-
-
     public function getUserId(): ?int
     {
-        return $_SESSION['user_id'] ?? null;
+        return isset($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : null;
     }
 
+    public function getRole(): string
+    {
+        return $_SESSION['user_role'] ?? 'user';
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isLoggedIn() && $this->getRole() === 'admin';
+    }
+
+    // ─────────────────────────────────────────────
+    // Connexion
+    // ─────────────────────────────────────────────
 
     public function login(string $email, string $password): array
     {
         try {
             $stmt = $this->pdo->prepare(
                 "SELECT id, nom, email, password, role
-                 FROM users
+                 FROM utilisateur
                  WHERE email = :email
                  LIMIT 1"
             );
@@ -47,25 +65,29 @@ class UserController
             }
 
             // Stocker les infos en session
-            $_SESSION['user_id']   = $user['id'];
+            $_SESSION['user_id']   = (int) $user['id'];
             $_SESSION['user_nom']  = $user['nom'];
             $_SESSION['user_role'] = $user['role'] ?? 'user';
             $_SESSION['actif']     = true;
 
-            return ['success' => true];
+            return ['success' => true, 'role' => $_SESSION['user_role']];
+
         } catch (PDOException $e) {
+            error_log("Login error : " . $e->getMessage());
             return ['success' => false, 'erreur' => 'Erreur de base de données.'];
         }
     }
 
-
+    // ─────────────────────────────────────────────
+    // Inscription
+    // ─────────────────────────────────────────────
 
     public function register(string $nom, string $email, string $password): array
     {
-        try {   
+        try {
             // Vérifier si l'email existe déjà
             $stmt = $this->pdo->prepare(
-                "SELECT id FROM users WHERE email = :email LIMIT 1"
+                "SELECT id FROM utilisateur WHERE email = :email LIMIT 1"
             );
             $stmt->execute([':email' => $email]);
 
@@ -77,44 +99,76 @@ class UserController
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
             $stmt = $this->pdo->prepare(
-                "INSERT INTO users (nom, email, password, role, created_at)
+                "INSERT INTO utilisateur (nom, email, password, role, created_at)
                  VALUES (:nom, :email, :password, 'user', NOW())"
             );
+
+            // ✅ FIX : les clés correspondent exactement aux placeholders
             $stmt->execute([
                 ':nom'      => $nom,
                 ':email'    => $email,
                 ':password' => $hash,
-                
             ]);
 
             return ['success' => true];
+
         } catch (PDOException $e) {
-            return ['success' => false, 'erreur' => 'Erreur lors de la création du compte.'];
+            error_log("Register error : " . $e->getMessage());
+            return ['success' => false, 'erreur' => 'Erreur lors de la création du compte. (' . $e->getMessage() . ')'];
         }
     }
 
+    // ─────────────────────────────────────────────
+    // Protection des pages
+    // ─────────────────────────────────────────────
 
-
-    public function requireAdmin(): void
+    /** Redirige vers login si pas connecté */
+    public function requireLogin(): void
     {
         if (!$this->isLoggedIn()) {
-            $_SESSION['redirect_apres_login'] = 'admin.php';
+            $_SESSION['redirect_apres_login'] = $_SERVER['REQUEST_URI'];
             header('Location: login.php');
             exit;
         }
+    }
 
-        if (($_SESSION['user_role'] ?? '') !== 'admin') {
+    /** Redirige vers accueil si pas admin */
+    public function requireAdmin(): void
+    {
+        $this->requireLogin();
+
+        if (!$this->isAdmin()) {
             header('Location: index.php');
             exit;
         }
     }
 
+    // ─────────────────────────────────────────────
+    // Déconnexion
+    // ─────────────────────────────────────────────
 
+    public function logout(): void
+    {
+        $_SESSION = [];
+        if (ini_get("session.use_cookies")) {
+            $p = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $p["path"], $p["domain"], $p["secure"], $p["httponly"]
+            );
+        }
+        session_destroy();
+        header('Location: login.php');
+        exit;
+    }
+
+    // ─────────────────────────────────────────────
+    // Init table (à appeler une seule fois)
+    // ─────────────────────────────────────────────
 
     public function initTable(): void
     {
         $this->pdo->exec("
-            CREATE TABLE IF NOT EXISTS users (
+            CREATE TABLE IF NOT EXISTS utilisateur (
                 id         INT AUTO_INCREMENT PRIMARY KEY,
                 nom        VARCHAR(100)  NOT NULL,
                 email      VARCHAR(150)  NOT NULL UNIQUE,

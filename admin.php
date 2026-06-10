@@ -4,9 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// ======================================================
-// PROTECTION ADMIN — seul endroit où le login est requis
-// ======================================================
+
 
 require_once __DIR__ . '/controller/userController.php';
 
