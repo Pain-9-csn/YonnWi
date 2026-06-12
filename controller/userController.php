@@ -143,9 +143,6 @@ class UserController
         }
     }
 
-    // ─────────────────────────────────────────────
-    // Déconnexion
-    // ─────────────────────────────────────────────
 
     public function logout(): void
     {
@@ -161,9 +158,7 @@ class UserController
         exit;
     }
 
-    // ─────────────────────────────────────────────
-    // Init table (à appeler une seule fois)
-    // ─────────────────────────────────────────────
+
 
     public function initTable(): void
     {
